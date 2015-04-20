@@ -1,6 +1,5 @@
 package controleur;
 
-
 import model.Jeu;
 import vue.Fenetre;
 
