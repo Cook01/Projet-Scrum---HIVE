@@ -1,9 +1,9 @@
 import controleur.ControlGroup;
-import model.Jeu;
+import model.Plateau;
 
 public class application {
     public static void main (String argv[]) {
-        Jeu jeu = new Jeu();
-        new ControlGroup(jeu);
+        Plateau plateau = new Plateau();
+        new ControlGroup(plateau);
     }
 }
