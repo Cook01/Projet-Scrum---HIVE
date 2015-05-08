@@ -1,13 +1,15 @@
 package controleur;
 
-import model.Jeu;
+import model.Plateau;
 import vue.Fenetre;
 
 public class ControlGroup {
-    public ControlGroup(Jeu jeu) {
-        Fenetre fenetre;
+    public ControlGroup(Plateau plateau) {
+        Fenetre fenetre = new Fenetre(plateau);
 
-        fenetre = new Fenetre(jeu);
+        new ControlBoutonJeu(plateau, fenetre);
+        new ControlInventaire(plateau, fenetre);
+        new ControlGrille(plateau, fenetre);
 
         fenetre.setVisible(true);
     }
