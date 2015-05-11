@@ -1,7 +1,6 @@
 package model;
 
 import model.typePiece.*;
-
 import java.util.ArrayList;
 
 public class Joueur {
@@ -110,5 +109,9 @@ public class Joueur {
 
     public ArrayList<Piece> getEnsemblePieceDisponible() {
         return ensemblePieceDisponible;
+    }
+
+    public String getCouleur() {
+        return couleur;
     }
 }
