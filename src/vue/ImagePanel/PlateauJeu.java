@@ -1,12 +1,12 @@
-package vue;
+package vue.ImagePanel;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class ImagePanel extends JPanel {
+public class PlateauJeu extends JPanel{
     private Image Background;
 
-    public ImagePanel() {
+    public PlateauJeu() {
         super();
         Background = new ImageIcon("image/plateau_jeu_hive2.jpg").getImage();
     }
