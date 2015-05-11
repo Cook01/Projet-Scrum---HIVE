@@ -17,18 +17,15 @@ public class Plateau {
 		joueurQuiJoue = joueurBlanc;
 	}
 
-	public boolean placer(Piece piece, Point point) {
+	public void placer(Piece piece, Point point) {
 		if(piece_pose.size()==0 && point.equals(new Point(0,0))) {
 			piece_pose.add(piece);
 			piece.setPosition(point);
-			return true;
 		} else if ( piece_pose.size()>0 && this.estPlacementPossible(point)) {
 			piece_pose.add(piece);
 			piece.setPosition(point);
 			this.setDependance(point, piece);
-			return true;
 		}
-		return false;
 	}
 
 	private void setDependance(Point point, Piece piece) {
@@ -88,27 +85,22 @@ public class Plateau {
 	}
 
 	public void jouer(Piece piece, Point point) {
-		boolean succes;
-		if(piece.getPosition() == null)
-			succes = placer(piece, point);
-		else succes = deplacer(piece, point);
+		if(piece.getPosition() == null) placer(piece, point);
+		else deplacer(piece, point);
 
-		if(succes)
-			if(joueurQuiJoue==joueurBlanc) joueurQuiJoue = joueurNoir;
-			else {
-				joueurQuiJoue = joueurBlanc;
-				tour++;
-			}
+		if(joueurQuiJoue==joueurBlanc) joueurQuiJoue = joueurNoir;
+		else {
+			joueurQuiJoue = joueurBlanc;
+			tour++;
+		}
 	}
 
-	private boolean deplacer(Piece piece, Point point) {
+	private void deplacer(Piece piece, Point point) {
 		if ( piece_pose.size()>0 && piece.getDeplacementPossible()!=null && piece.getDeplacementPossible().contient(point)) {
 			casserDependance(piece, point);
 			piece.setPosition(point);
 			setDependance(point, piece);
-			return true;
 		}
-		return false;
 	}
 
 	private void casserDependance(Piece piece, Point point) {
