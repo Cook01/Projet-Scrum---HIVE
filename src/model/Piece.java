@@ -1,15 +1,20 @@
 package model;
 
+import model.typePiece.TypePieceEnum;
+
 import java.awt.*;
 
 public abstract class Piece {
+    public final TypePieceEnum typePiece;
     protected Point position;
     protected Piece dessus, dessus_droite, dessous_droite, dessous, dessous_gauche, dessus_gauche;
     protected Joueur joueur;
 
-    public Piece(Joueur joueur){
+
+    public Piece(Joueur joueur, TypePieceEnum typePiece){
         dessus = dessus_droite = dessous_droite = dessous = dessous_gauche = dessus_gauche = null;
         this.joueur = joueur;
+        this.typePiece = typePiece;
     }
 
     public Point getPosition() {

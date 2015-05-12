@@ -3,16 +3,13 @@ package vue.Piece;
 import javax.swing.*;
 import java.awt.*;
 
-public class FourmiBlanc extends JLabel{
-    private Image logo;
-
+public class FourmiBlanc extends Jeton{
     public FourmiBlanc(){
         super();
         logo = new ImageIcon("image/Blanc/jeton_fourmi.png").getImage();
-        this.setPreferredSize(new Dimension(70, 60));
     }
 
     public void paintComponent(Graphics g) {
-        g.drawImage(logo,0,0,70,60,null);
+        g.drawImage(logo,pos_x,pos_y,taille_x,taille_y,null);
     }
 }

@@ -6,7 +6,7 @@ import model.Piece;
 
 public class Scarabee extends Piece{
     public Scarabee(Joueur joueur) {
-        super(joueur);
+        super(joueur, TypePieceEnum.Scarabee);
     }
 
     public ArrayListPoint getDeplacementPossible() {

@@ -9,7 +9,7 @@ import java.awt.*;
 
 public class Abeille extends Piece {
     public Abeille(Joueur joueur){
-        super(joueur);
+        super(joueur, TypePieceEnum.Abeille);
     }
 
     public ArrayListPoint getDeplacementPossible() {

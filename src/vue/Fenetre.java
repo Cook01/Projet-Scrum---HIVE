@@ -1,5 +1,6 @@
 package vue;
 
+import model.Joueur;
 import model.Plateau;
 import vue.ImagePanel.EcranAccueil;
 import vue.ImagePanel.PlateauJeu;
@@ -10,13 +11,15 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 
+
 public class Fenetre extends JFrame {
-    private Plateau plateau;
-    private JButton boutonJouer;
     public final static int TAILLE_FENETRE_X = 960;
     public final static int TAILLE_FENETRE_Y = 600;
+    private Plateau plateau;
+    private JButton boutonJouer;
     private JPanel jpAbeilleBlanc, jpAraigneeBlanc, jpFourmiBlanc, jpSauterelleBlanc, jpScarabeeBlanc;
     private JPanel jpAbeilleNoir, jpAraigneeNoir, jpFourmiNoir, jpSauterelleNoir, jpScarabeeNoir;
+    private JPanel jpDefaut;
     private Grille grille;
 
 
@@ -34,9 +37,11 @@ public class Fenetre extends JFrame {
         affichageEcranAccueil();
     }
 
+
     private void initialiseEcranAccueil() {
         boutonJouer = new JButton("Démarrer");
     }
+
 
     private void affichageEcranAccueil() {
         JPanel panelAccueil = new EcranAccueil();
@@ -53,9 +58,11 @@ public class Fenetre extends JFrame {
         setContentPane(panelAccueil);
     }
 
+
     public void setControlBoutonJouer(ActionListener al) {
         boutonJouer.addActionListener(al);
     }
+
 
     public void initialisePlateau(){
         JLabel abeilleBlanc = new AbeilleBlanc();
@@ -91,133 +98,128 @@ public class Fenetre extends JFrame {
         jpScarabeeNoir = new JPanel();
         jpScarabeeNoir.add(scarabeeNoir);
 
+        jpDefaut = new JPanel();
+
         grille = new Grille();
     }
 
+
+    private JPanel caseInventaireNom(Joueur joueur) {
+        JPanel jpInventaire = new JPanel();
+        JPanel caseNomInventaire = new JPanel();
+
+        caseNomInventaire.setLayout(new BorderLayout());
+        if(joueur==plateau.getJoueurBlanc())
+            jpInventaire.add(new JLabel("Inventaire Blanc"));
+        else jpInventaire.add(new JLabel("Inventaire Noir"));
+        caseNomInventaire.add(Box.createVerticalStrut((int)(caseNomInventaire.getHeight()*0.4)), BorderLayout.SOUTH);
+        caseNomInventaire.add(jpInventaire, BorderLayout.CENTER);
+
+        return jpInventaire;
+    }
+
+
+    private JPanel caseInventaire(EnumJeton jeton){
+        JPanel indicateurPiece = new JPanel();
+        JPanel typePiece;
+        JPanel globInventaire = new JPanel();
+        JPanel caseInventaire = new JPanel();
+
+        globInventaire.setLayout(new BoxLayout(globInventaire, BoxLayout.Y_AXIS));
+        caseInventaire.setLayout(new BorderLayout());
+        switch(jeton){
+            case AbeilleBlanc:
+                typePiece = jpAbeilleBlanc;
+                indicateurPiece.add(new JLabel("x " + plateau.getJoueurBlanc().nbAbeilleDisponible()));
+                break;
+            case AbeilleNoir:
+                typePiece = jpAbeilleNoir;
+                indicateurPiece.add(new JLabel("x " + plateau.getJoueurNoir().nbAbeilleDisponible()));
+                break;
+            case AraigneeBlanc:
+                typePiece = jpAraigneeBlanc;
+                indicateurPiece.add(new JLabel("x " + plateau.getJoueurBlanc().nbAraigneeDisponible()));
+                break;
+            case AraigneeNoir:
+                typePiece = jpAraigneeNoir;
+                indicateurPiece.add(new JLabel("x " + plateau.getJoueurNoir().nbAraigneeDisponible()));
+                break;
+            case FourmiBlanc:
+                typePiece = jpFourmiBlanc;
+                indicateurPiece.add(new JLabel("x " + plateau.getJoueurBlanc().nbFourmiDisponible()));
+                break;
+            case FourmiNoir:
+                typePiece = jpFourmiNoir;
+                indicateurPiece.add(new JLabel("x " + plateau.getJoueurNoir().nbFourmiDisponible()));
+                break;
+            case SauterelleBlanc:
+                typePiece = jpSauterelleBlanc;
+                indicateurPiece.add(new JLabel("x " + plateau.getJoueurBlanc().nbSauterelleDisponible()));
+                break;
+            case SauterelleNoir:
+                typePiece = jpSauterelleNoir;
+                indicateurPiece.add(new JLabel("x " + plateau.getJoueurNoir().nbSauterelleDisponible()));
+                break;
+            case ScarabeeBlanc:
+                typePiece = jpScarabeeBlanc;
+                indicateurPiece.add(new JLabel("x " + plateau.getJoueurBlanc().nbScarabeeDisponible()));
+                break;
+            case ScarabeeNoir:
+                typePiece = jpScarabeeNoir;
+                indicateurPiece.add(new JLabel("x " + plateau.getJoueurNoir().nbScarabeeDisponible()));
+                break;
+            default:
+                typePiece = jpDefaut;
+                indicateurPiece.add(new JLabel("Problème du Jeton"));
+        }
+        globInventaire.add(typePiece);
+        globInventaire.add(indicateurPiece);
+        caseInventaire.add(globInventaire, BorderLayout.CENTER);
+
+        return caseInventaire;
+    }
+
+
+    private JPanel affichageInventaireJoueurBlanc(){
+        JPanel inventaire = new JPanel();
+
+        inventaire.setLayout(new GridLayout(6, 1));
+        inventaire.setPreferredSize(new Dimension((int) (TAILLE_FENETRE_X * 0.18), TAILLE_FENETRE_Y));
+
+        inventaire.add(caseInventaireNom(plateau.getJoueurBlanc()));
+        inventaire.add(caseInventaire(EnumJeton.AbeilleBlanc));
+        inventaire.add(caseInventaire(EnumJeton.AraigneeBlanc));
+        inventaire.add(caseInventaire(EnumJeton.FourmiBlanc));
+        inventaire.add(caseInventaire(EnumJeton.SauterelleBlanc));
+        inventaire.add(caseInventaire(EnumJeton.ScarabeeBlanc));
+
+        return inventaire;
+    }
+
+
+    private JPanel affichageInventaireJoueurNoir(){
+        JPanel inventaire = new JPanel();
+
+        inventaire.setLayout(new GridLayout(6, 1));
+        inventaire.setPreferredSize(new Dimension((int) (TAILLE_FENETRE_X * 0.18), TAILLE_FENETRE_Y));
+
+        inventaire.add(caseInventaireNom(plateau.getJoueurNoir()));
+        inventaire.add(caseInventaire(EnumJeton.AbeilleNoir));
+        inventaire.add(caseInventaire(EnumJeton.AraigneeNoir));
+        inventaire.add(caseInventaire(EnumJeton.FourmiNoir));
+        inventaire.add(caseInventaire(EnumJeton.SauterelleNoir));
+        inventaire.add(caseInventaire(EnumJeton.ScarabeeNoir));
+
+        return inventaire;
+    }
+
+
     public void affichagePlateau(boolean avecIndicateurPlacement, boolean avecIndicateurDeplacement) {
         JPanel panelPlateau = new PlateauJeu();
-        JPanel inventaireBlanc = new JPanel();
-        JPanel inventaireNoir = new JPanel();
+        JPanel inventaireBlanc = affichageInventaireJoueurBlanc();
+        JPanel inventaireNoir = affichageInventaireJoueurNoir();
 
         panelPlateau.setLayout(new BorderLayout());
-
-        inventaireBlanc.setLayout(new GridLayout(6, 1));
-        inventaireBlanc.setPreferredSize(new Dimension((int) (TAILLE_FENETRE_X * 0.18), TAILLE_FENETRE_Y));
-        JPanel jpInventaireBlanc = new JPanel();
-        jpInventaireBlanc.add(new JLabel("Inventaire Blanc"));
-        JPanel case1Blanc = new JPanel();
-        case1Blanc.setLayout(new BorderLayout());
-        case1Blanc.add(jpInventaireBlanc, BorderLayout.CENTER);
-        JPanel indicateurAbeilleBlanc = new JPanel();
-        indicateurAbeilleBlanc.add(new JLabel("x " + plateau.getJoueurBlanc().nbAbeilleDisponible()));
-        JPanel globAbeilleBlanc = new JPanel();
-        globAbeilleBlanc.setLayout(new BoxLayout(globAbeilleBlanc, BoxLayout.Y_AXIS));
-        globAbeilleBlanc.add(jpAbeilleBlanc);
-        globAbeilleBlanc.add(indicateurAbeilleBlanc);
-        JPanel case2Blanc = new JPanel();
-        case2Blanc.setLayout(new BorderLayout());
-        case2Blanc.add(globAbeilleBlanc, BorderLayout.CENTER);
-        JPanel indicateurAraigneeBlanc = new JPanel();
-        indicateurAraigneeBlanc.add(new JLabel("x " + plateau.getJoueurBlanc().nbAraigneeDisponible()));
-        JPanel globAraigneeBlanc = new JPanel();
-        globAraigneeBlanc.setLayout(new BoxLayout(globAraigneeBlanc, BoxLayout.Y_AXIS));
-        globAraigneeBlanc.add(jpAraigneeBlanc);
-        globAraigneeBlanc.add(indicateurAraigneeBlanc);
-        JPanel case3Blanc = new JPanel();
-        case3Blanc.setLayout(new BorderLayout());
-        case3Blanc.add(globAraigneeBlanc, BorderLayout.CENTER);
-        JPanel indicateurFourmiBlanc = new JPanel();
-        indicateurFourmiBlanc.add(new JLabel("x " + plateau.getJoueurBlanc().nbFourmiDisponible()));
-        JPanel globFourmiBlanc = new JPanel();
-        globFourmiBlanc.setLayout(new BoxLayout(globFourmiBlanc, BoxLayout.Y_AXIS));
-        globFourmiBlanc.add(jpFourmiBlanc);
-        globFourmiBlanc.add(indicateurFourmiBlanc);
-        JPanel case4Blanc = new JPanel();
-        case4Blanc.setLayout(new BorderLayout());
-        case4Blanc.add(globFourmiBlanc, BorderLayout.CENTER);
-        JPanel indicateurSauterelleBlanc = new JPanel();
-        indicateurSauterelleBlanc.add(new JLabel("x " + plateau.getJoueurBlanc().nbSauterelleDisponible()));
-        JPanel globSauterelleBlanc = new JPanel();
-        globSauterelleBlanc.setLayout(new BoxLayout(globSauterelleBlanc, BoxLayout.Y_AXIS));
-        globSauterelleBlanc.add(jpSauterelleBlanc);
-        globSauterelleBlanc.add(indicateurSauterelleBlanc);
-        JPanel case5Blanc = new JPanel();
-        case5Blanc.setLayout(new BorderLayout());
-        case5Blanc.add(globSauterelleBlanc, BorderLayout.CENTER);
-        JPanel indicateurScarabeeBlanc = new JPanel();
-        indicateurScarabeeBlanc.add(new JLabel("x " + plateau.getJoueurBlanc().nbScarabeeDisponible()));
-        JPanel globScarabeeBlanc = new JPanel();
-        globScarabeeBlanc.setLayout(new BoxLayout(globScarabeeBlanc, BoxLayout.Y_AXIS));
-        globScarabeeBlanc.add(jpScarabeeBlanc);
-        globScarabeeBlanc.add(indicateurScarabeeBlanc);
-        JPanel case6Blanc = new JPanel();
-        case6Blanc.setLayout(new BorderLayout());
-        case6Blanc.add(globScarabeeBlanc, BorderLayout.CENTER);
-        inventaireBlanc.add(case1Blanc);
-        inventaireBlanc.add(case2Blanc);
-        inventaireBlanc.add(case3Blanc);
-        inventaireBlanc.add(case4Blanc);
-        inventaireBlanc.add(case5Blanc);
-        inventaireBlanc.add(case6Blanc);
-
-        inventaireNoir.setLayout(new GridLayout(6, 1));
-        inventaireNoir.setPreferredSize(new Dimension((int) (TAILLE_FENETRE_X * 0.18), TAILLE_FENETRE_Y));
-        JPanel jpInventaireNoir = new JPanel();
-        jpInventaireNoir.add(new JLabel("Inventaire Noir"));
-        JPanel case1Noir = new JPanel();
-        case1Noir.setLayout(new BorderLayout());
-        case1Noir.add(jpInventaireNoir, BorderLayout.CENTER);
-        JPanel indicateurAbeilleNoir = new JPanel();
-        indicateurAbeilleNoir.add(new JLabel("x " + plateau.getJoueurNoir().nbAbeilleDisponible()));
-        JPanel globAbeilleNoir = new JPanel();
-        globAbeilleNoir.setLayout(new BoxLayout(globAbeilleNoir, BoxLayout.Y_AXIS));
-        globAbeilleNoir.add(jpAbeilleNoir);
-        globAbeilleNoir.add(indicateurAbeilleNoir);
-        JPanel case2Noir = new JPanel();
-        case2Noir.setLayout(new BorderLayout());
-        case2Noir.add(globAbeilleNoir, BorderLayout.CENTER);
-        JPanel indicateurAraigneeNoir = new JPanel();
-        indicateurAraigneeNoir.add(new JLabel("x " + plateau.getJoueurNoir().nbAraigneeDisponible()));
-        JPanel globAraigneeNoir = new JPanel();
-        globAraigneeNoir.setLayout(new BoxLayout(globAraigneeNoir, BoxLayout.Y_AXIS));
-        globAraigneeNoir.add(jpAraigneeNoir);
-        globAraigneeNoir.add(indicateurAraigneeNoir);
-        JPanel case3Noir = new JPanel();
-        case3Noir.setLayout(new BorderLayout());
-        case3Noir.add(globAraigneeNoir, BorderLayout.CENTER);
-        JPanel indicateurFourmiNoir = new JPanel();
-        indicateurFourmiNoir.add(new JLabel("x " + plateau.getJoueurNoir().nbFourmiDisponible()));
-        JPanel globFourmiNoir = new JPanel();
-        globFourmiNoir.setLayout(new BoxLayout(globFourmiNoir, BoxLayout.Y_AXIS));
-        globFourmiNoir.add(jpFourmiNoir);
-        globFourmiNoir.add(indicateurFourmiNoir);
-        JPanel case4Noir = new JPanel();
-        case4Noir.setLayout(new BorderLayout());
-        case4Noir.add(globFourmiNoir, BorderLayout.CENTER);
-        JPanel indicateurSauterelleNoir = new JPanel();
-        indicateurSauterelleNoir.add(new JLabel("x " + plateau.getJoueurNoir().nbSauterelleDisponible()));
-        JPanel globSauterelleNoir = new JPanel();
-        globSauterelleNoir.setLayout(new BoxLayout(globSauterelleNoir, BoxLayout.Y_AXIS));
-        globSauterelleNoir.add(jpSauterelleNoir);
-        globSauterelleNoir.add(indicateurSauterelleNoir);
-        JPanel case5Noir = new JPanel();
-        case5Noir.setLayout(new BorderLayout());
-        case5Noir.add(globSauterelleNoir, BorderLayout.CENTER);
-        JPanel indicateurScarabeeNoir = new JPanel();
-        indicateurScarabeeNoir.add(new JLabel("x " + plateau.getJoueurNoir().nbScarabeeDisponible()));
-        JPanel globScarabeeNoir = new JPanel();
-        globScarabeeNoir.setLayout(new BoxLayout(globScarabeeNoir, BoxLayout.Y_AXIS));
-        globScarabeeNoir.add(jpScarabeeNoir);
-        globScarabeeNoir.add(indicateurScarabeeNoir);
-        JPanel case6Noir = new JPanel();
-        case6Noir.setLayout(new BorderLayout());
-        case6Noir.add(globScarabeeNoir, BorderLayout.CENTER);
-        inventaireNoir.add(case1Noir);
-        inventaireNoir.add(case2Noir);
-        inventaireNoir.add(case3Noir);
-        inventaireNoir.add(case4Noir);
-        inventaireNoir.add(case5Noir);
-        inventaireNoir.add(case6Noir);
 
         grille.initiliser(plateau, avecIndicateurPlacement, avecIndicateurDeplacement);
 
@@ -227,6 +229,7 @@ public class Fenetre extends JFrame {
 
         setContentPane(panelPlateau);
     }
+
 
     public void setControlInventaire(MouseListener ml) {
         jpAbeilleBlanc.addMouseListener(ml);
@@ -242,49 +245,61 @@ public class Fenetre extends JFrame {
         jpScarabeeNoir.addMouseListener(ml);
     }
 
+
     public void setControlGrille(MouseListener ml) {
         grille.addMouseListener(ml);
     }
+
 
     public JPanel getJpAbeilleBlanc() {
         return jpAbeilleBlanc;
     }
 
+
     public JPanel getJpAraigneeBlanc() {
         return jpAraigneeBlanc;
     }
+
 
     public JPanel getJpFourmiBlanc() {
         return jpFourmiBlanc;
     }
 
+
     public JPanel getJpSauterelleBlanc() {
         return jpSauterelleBlanc;
     }
+
 
     public JPanel getJpScarabeeBlanc() {
         return jpScarabeeBlanc;
     }
 
+
     public JPanel getJpAbeilleNoir() {
         return jpAbeilleNoir;
     }
+
 
     public JPanel getJpAraigneeNoir() {
         return jpAraigneeNoir;
     }
 
+
     public JPanel getJpFourmiNoir() {
         return jpFourmiNoir;
     }
+
 
     public JPanel getJpSauterelleNoir() {
         return jpSauterelleNoir;
     }
 
+
     public JPanel getJpScarabeeNoir() {
         return jpScarabeeNoir;
     }
+
 
     public Grille getGrille() {
         return grille;

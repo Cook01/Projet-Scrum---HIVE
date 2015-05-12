@@ -6,7 +6,7 @@ import model.Piece;
 
 public class Fourmi extends Piece{
     public Fourmi(Joueur joueur) {
-        super(joueur);
+        super(joueur, TypePieceEnum.Fourmi);
     }
 
     public ArrayListPoint getDeplacementPossible() {

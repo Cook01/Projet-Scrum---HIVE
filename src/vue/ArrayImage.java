@@ -9,10 +9,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+
 public class ArrayImage {
     private Plateau plateau;
     private ArrayList<Image> images;
     private ArrayListPoint indicePlacementImage;
+
 
     public ArrayImage(Plateau plateau, boolean avecIndicateurPlacement, boolean avecIndicateurDeplacement){
         this.plateau = plateau;
@@ -58,23 +60,27 @@ public class ArrayImage {
         }
     }
 
+
     private Image accessible() {
         return new ImageIcon("image/jeton_selection.png").getImage();
     }
 
+
     private Image associationImage(Piece piece) {
         if(piece.getJoueur()==plateau.getJoueurBlanc()) {
-            if (piece instanceof Abeille)
-                return new ImageIcon("image/Blanc/jeton_abeille.png").getImage();
-            else if (piece instanceof Araignee)
-                return new ImageIcon("image/Blanc/jeton_araignee.png").getImage();
-            else if (piece instanceof Fourmi)
-                return new ImageIcon("image/Blanc/jeton_fourmi.png").getImage();
-            else if (piece instanceof Sauterelle)
-                return new ImageIcon("image/Blanc/jeton_sauterelle.png").getImage();
-            else if (piece instanceof Scarabee)
-                return new ImageIcon("image/Blanc/jeton_scarabee.png").getImage();
-        } else {
+            switch (piece.typePiece) {
+                case Abeille:
+                    return new ImageIcon("image/Blanc/jeton_abeille.png").getImage();
+                case Araignee:
+                    return new ImageIcon("image/Blanc/jeton_araignee.png").getImage();
+                case Fourmi:
+                    return new ImageIcon("image/Blanc/jeton_fourmi.png").getImage();
+                case Sauterelle:
+                    return new ImageIcon("image/Blanc/jeton_sauterelle.png").getImage();
+                case Scarabee:
+                    return new ImageIcon("image/Blanc/jeton_scarabee.png").getImage();
+            }
+        }else{
             if (piece instanceof Abeille)
                 return new ImageIcon("image/Noir/jeton_abeille.png").getImage();
             else if (piece instanceof Araignee)
@@ -89,9 +95,11 @@ public class ArrayImage {
         return null;
     }
 
+
     public ArrayList<Image> getImages() {
         return images;
     }
+
 
     public ArrayList<Point> getIndicePlacementImage() {
         return indicePlacementImage;
