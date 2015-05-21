@@ -70,27 +70,27 @@ public class ArrayImage {
         if(piece.getJoueur()==plateau.getJoueurBlanc()) {
             switch (piece.typePiece) {
                 case Abeille:
-                    return new ImageIcon("image/Blanc/jeton_abeille.png").getImage();
+                    return new ImageIcon("image/Blanc/jeton_blanc/jeton_blanc_abeille.png").getImage();
                 case Araignee:
-                    return new ImageIcon("image/Blanc/jeton_araignee.png").getImage();
+                    return new ImageIcon("image/Blanc/jeton_blanc/jeton_blanc_araignee.png").getImage();
                 case Fourmi:
-                    return new ImageIcon("image/Blanc/jeton_fourmi.png").getImage();
+                    return new ImageIcon("image/Blanc/jeton_blanc/jeton_blanc_fourmi.png").getImage();
                 case Sauterelle:
-                    return new ImageIcon("image/Blanc/jeton_sauterelle.png").getImage();
+                    return new ImageIcon("image/Blanc/jeton_blanc/jeton_blanc_sauterelle.png").getImage();
                 case Scarabee:
-                    return new ImageIcon("image/Blanc/jeton_scarabee.png").getImage();
+                    return new ImageIcon("image/Blanc/jeton_blanc/jeton_blanc_scarabee.png").getImage();
             }
         }else{
             if (piece instanceof Abeille)
-                return new ImageIcon("image/Noir/jeton_abeille.png").getImage();
+                return new ImageIcon("image/Noir/jeton_noir/jeton_noir_abeille.png").getImage();
             else if (piece instanceof Araignee)
-                return new ImageIcon("image/Noir/jeton_araignee.png").getImage();
+                return new ImageIcon("image/Noir/jeton_noir/jeton_noir_araignee.png").getImage();
             else if (piece instanceof Fourmi)
-                return new ImageIcon("image/Noir/jeton_fourmi.png").getImage();
+                return new ImageIcon("image/Noir/jeton_noir/jeton_noir_fourmi.png").getImage();
             else if (piece instanceof Sauterelle)
-                return new ImageIcon("image/Noir/jeton_sauterelle.png").getImage();
+                return new ImageIcon("image/Noir/jeton_noir/jeton_noir_sauterelle.png").getImage();
             else if (piece instanceof Scarabee)
-                return new ImageIcon("image/Noir/jeton_scarabee.png").getImage();
+                return new ImageIcon("image/Noir/jeton_noir/jeton_noir_scarabee.png").getImage();
         }
         return null;
     }

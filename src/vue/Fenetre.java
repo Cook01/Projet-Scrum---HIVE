@@ -7,13 +7,15 @@ import vue.ImagePanel.PlateauJeu;
 import vue.Piece.*;
 
 import javax.swing.*;
+import javax.xml.bind.Marshaller;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
 
 
 public class Fenetre extends JFrame {
-    public final static int TAILLE_FENETRE_X = 960;
+    public final static int TAILLE_FENETRE_X = 800;
     public final static int TAILLE_FENETRE_Y = 600;
     private Plateau plateau;
     private JButton boutonJouer;
@@ -100,7 +102,8 @@ public class Fenetre extends JFrame {
 
         jpDefaut = new JPanel();
 
-        grille = new Grille();
+        grille = new Grille(this);
+        grille.setFocusable(true);
     }
 
 
@@ -184,7 +187,7 @@ public class Fenetre extends JFrame {
         JPanel inventaire = new JPanel();
 
         inventaire.setLayout(new GridLayout(6, 1));
-        inventaire.setPreferredSize(new Dimension((int) (TAILLE_FENETRE_X * 0.18), TAILLE_FENETRE_Y));
+        inventaire.setPreferredSize(new Dimension((int) (TAILLE_FENETRE_X * 0.17), TAILLE_FENETRE_Y));
 
         inventaire.add(caseInventaireNom(plateau.getJoueurBlanc()));
         inventaire.add(caseInventaire(EnumJeton.AbeilleBlanc));
@@ -201,7 +204,7 @@ public class Fenetre extends JFrame {
         JPanel inventaire = new JPanel();
 
         inventaire.setLayout(new GridLayout(6, 1));
-        inventaire.setPreferredSize(new Dimension((int) (TAILLE_FENETRE_X * 0.18), TAILLE_FENETRE_Y));
+        inventaire.setPreferredSize(new Dimension((int) (TAILLE_FENETRE_X * 0.17), TAILLE_FENETRE_Y));
 
         inventaire.add(caseInventaireNom(plateau.getJoueurNoir()));
         inventaire.add(caseInventaire(EnumJeton.AbeilleNoir));
@@ -215,7 +218,7 @@ public class Fenetre extends JFrame {
 
 
     public void affichagePlateau(boolean avecIndicateurPlacement, boolean avecIndicateurDeplacement) {
-        JPanel panelPlateau = new PlateauJeu();
+        JPanel panelPlateau = new JPanel();
         JPanel inventaireBlanc = affichageInventaireJoueurBlanc();
         JPanel inventaireNoir = affichageInventaireJoueurNoir();
 
@@ -228,6 +231,7 @@ public class Fenetre extends JFrame {
         panelPlateau.add(inventaireNoir, BorderLayout.EAST);
 
         setContentPane(panelPlateau);
+        grille.requestFocusInWindow();
     }
 
 
@@ -246,8 +250,9 @@ public class Fenetre extends JFrame {
     }
 
 
-    public void setControlGrille(MouseListener ml) {
+    public void setControlGrille(MouseListener ml, KeyListener kl) {
         grille.addMouseListener(ml);
+        grille.addKeyListener(kl);
     }
 
 

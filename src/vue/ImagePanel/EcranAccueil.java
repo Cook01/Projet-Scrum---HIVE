@@ -8,7 +8,7 @@ public class EcranAccueil extends JPanel {
 
     public EcranAccueil() {
         super();
-        Background = new ImageIcon("image/plateau_jeu_hive2.jpg").getImage();
+        Background = new ImageIcon("image/honneymoon_proto.jpg").getImage();
     }
 
     public void paintComponent(Graphics g){

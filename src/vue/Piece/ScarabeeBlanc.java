@@ -6,7 +6,7 @@ import java.awt.*;
 public class ScarabeeBlanc extends Jeton{
     public ScarabeeBlanc(){
         super();
-        logo = new ImageIcon("image/Blanc/jeton_scarabee.png").getImage();
+        logo = new ImageIcon("image/Blanc/jeton_blanc_inventaire/jeton_blanc_scarabee.png").getImage();
     }
 
     public void paintComponent(Graphics g) {

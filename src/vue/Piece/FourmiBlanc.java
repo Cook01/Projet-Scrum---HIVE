@@ -6,7 +6,7 @@ import java.awt.*;
 public class FourmiBlanc extends Jeton{
     public FourmiBlanc(){
         super();
-        logo = new ImageIcon("image/Blanc/jeton_fourmi.png").getImage();
+        logo = new ImageIcon("image/Blanc/jeton_blanc_inventaire/jeton_blanc_fourmi.png").getImage();
     }
 
     public void paintComponent(Graphics g) {

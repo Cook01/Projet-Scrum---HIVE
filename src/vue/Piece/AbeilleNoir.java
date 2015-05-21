@@ -6,7 +6,7 @@ import java.awt.*;
 public class AbeilleNoir extends Jeton{
     public AbeilleNoir(){
         super();
-        logo = new ImageIcon("image/Noir/jeton_abeille.png").getImage();
+        logo = new ImageIcon("image/Noir/jeton_noir_inventaire/jeton_noir_abeille.png").getImage();
     }
 
     public void paintComponent(Graphics g) {

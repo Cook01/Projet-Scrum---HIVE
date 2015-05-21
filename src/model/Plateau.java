@@ -132,46 +132,6 @@ public class Plateau {
 		return piece;
 	}
 
-	public int getPositionPieceXMax() {
-		if(piece_pose.size()!=0) {
-			int max_x = piece_pose.get(0).getPosition().x;
-			for(Piece piece : piece_pose)
-				if(piece.getPosition().x > max_x)
-					max_x = piece.getPosition().x;
-			return max_x;
-		} else return 0;
-	}
-
-	public int getPositionPieceYMax() {
-		if(piece_pose.size()!=0) {
-			int max_y = piece_pose.get(0).getPosition().y;
-			for(Piece piece : piece_pose)
-				if(piece.getPosition().y > max_y)
-					max_y = piece.getPosition().y;
-			return max_y;
-		} else return 0;
-	}
-
-	public int getPositionPieceXMin() {
-		if(piece_pose.size()!=0) {
-			int min_x = piece_pose.get(0).getPosition().x;
-			for (Piece piece : piece_pose)
-				if (piece.getPosition().x < min_x)
-					min_x = piece.getPosition().x;
-			return min_x;
-		} else return 0;
-	}
-
-	public int getPositionPieceYMin() {
-		if(piece_pose.size()!=0) {
-			int min_y = piece_pose.get(0).getPosition().y;
-			for(Piece piece : piece_pose)
-				if(piece.getPosition().y < min_y)
-					min_y = piece.getPosition().y;
-			return min_y;
-		} else return 0;
-	}
-
 	public Joueur getJoueurQuiJoue() {
 		return joueurQuiJoue;
 	}

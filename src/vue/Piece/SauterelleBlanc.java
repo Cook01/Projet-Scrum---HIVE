@@ -6,7 +6,7 @@ import java.awt.*;
 public class SauterelleBlanc extends Jeton{
     public SauterelleBlanc(){
         super();
-        logo = new ImageIcon("image/Blanc/jeton_sauterelle.png").getImage();
+        logo = new ImageIcon("image/Blanc/jeton_blanc_inventaire/jeton_blanc_sauterelle.png").getImage();
     }
 
     public void paintComponent(Graphics g) {
