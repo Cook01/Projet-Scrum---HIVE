@@ -119,9 +119,11 @@ public class ControlGrille implements MouseListener, KeyListener{
                             }
                         } else {
                             if(plateau.getJoueurQuiJoue() == plateau.getPiece(position).getJoueur()) {
-                                plateau.setPieceSelectionne(plateau.getPiece(position));
-                                fenetre.affichagePlateau(false, true);
-                                fenetre.revalidate();
+                                if(plateau.tour!=4 || plateau.getJoueurQuiJoue().nbAbeilleDisponible()==0) {
+                                    plateau.setPieceSelectionne(plateau.getPiece(position));
+                                    fenetre.affichagePlateau(false, true);
+                                    fenetre.revalidate();
+                                }
                             }
                         }
                     }

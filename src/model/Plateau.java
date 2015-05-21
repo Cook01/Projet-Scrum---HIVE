@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class Plateau {
 	private ArrayList<Piece> piece_pose;
-	private int tour;
+	public int tour;
 	private Joueur joueurQuiJoue, joueurBlanc, joueurNoir;
 	private Piece pieceSelectionne;
 
