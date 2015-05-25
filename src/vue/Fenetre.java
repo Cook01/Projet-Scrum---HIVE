@@ -16,7 +16,7 @@ public class Fenetre extends JFrame {
     public final static int TAILLE_FENETRE_X = 800;
     public final static int TAILLE_FENETRE_Y = 600;
     private Plateau plateau;
-    private JButton boutonJouer;
+    private JButton boutonMenu, boutonJouer, bouton1, bouton2, bouton3;
     private JPanel jpAbeilleBlanc, jpAraigneeBlanc, jpFourmiBlanc, jpSauterelleBlanc, jpScarabeeBlanc;
     private JPanel jpAbeilleNoir, jpAraigneeNoir, jpFourmiNoir, jpSauterelleNoir, jpScarabeeNoir;
     private JPanel jpDefaut;
@@ -29,6 +29,7 @@ public class Fenetre extends JFrame {
         this.plateau = plateau;
 
         initialiseEcranAccueil();
+        initialiseEcranMenu();
         initialisePlateau();
 
         setSize(TAILLE_FENETRE_X, TAILLE_FENETRE_Y);
@@ -39,9 +40,16 @@ public class Fenetre extends JFrame {
         affichageEcranAccueil();
     }
 
+    private void initialiseEcranMenu() {
+        boutonJouer = new JButton("Démarrer");
+        bouton1 = new JButton("Bouton 1");
+        bouton2 = new JButton("Bouton 2");
+        bouton3 = new JButton("Bouton 3");
+    }
+
 
     private void initialiseEcranAccueil() {
-        boutonJouer = new JButton("Démarrer");
+        boutonMenu = new JButton("Menu");
     }
 
 
@@ -50,12 +58,41 @@ public class Fenetre extends JFrame {
         JPanel conteneurBoutonJouer = new JPanel();
 
         panelAccueil.setLayout(new BoxLayout(panelAccueil, BoxLayout.Y_AXIS));
-        conteneurBoutonJouer.setLayout(new BoxLayout(conteneurBoutonJouer, BoxLayout.X_AXIS));
-        conteneurBoutonJouer.setOpaque(true);
+        conteneurBoutonJouer.setOpaque(false);
 
         panelAccueil.add(Box.createVerticalStrut((int)(TAILLE_FENETRE_Y*0.8)));
+        conteneurBoutonJouer.add(boutonMenu);
+        panelAccueil.add(conteneurBoutonJouer);
+
+        setContentPane(panelAccueil);
+    }
+
+
+    public void affichageEcranMenu() {
+        JPanel panelAccueil = new EcranAccueil();
+        JPanel conteneurBoutonJouer = new JPanel();
+        JPanel conteneurBouton1 = new JPanel();
+        JPanel conteneurBouton2 = new JPanel();
+        JPanel conteneurBouton3 = new JPanel();
+
+        panelAccueil.setLayout(new BoxLayout(panelAccueil, BoxLayout.Y_AXIS));
+        conteneurBoutonJouer.setOpaque(false);
+        conteneurBouton1.setOpaque(false);
+        conteneurBouton2.setOpaque(false);
+        conteneurBouton3.setOpaque(false);
+
+        panelAccueil.add(Box.createVerticalStrut((int)(TAILLE_FENETRE_Y*0.6)));
         conteneurBoutonJouer.add(boutonJouer);
         panelAccueil.add(conteneurBoutonJouer);
+        panelAccueil.add(Box.createVerticalStrut((int)(TAILLE_FENETRE_Y*0.02)));
+        conteneurBouton1.add(bouton1);
+        panelAccueil.add(conteneurBouton1);
+        panelAccueil.add(Box.createVerticalStrut((int)(TAILLE_FENETRE_Y*0.02)));
+        conteneurBouton2.add(bouton2);
+        panelAccueil.add(conteneurBouton2);
+        panelAccueil.add(Box.createVerticalStrut((int)(TAILLE_FENETRE_Y*0.02)));
+        conteneurBouton3.add(bouton3);
+        panelAccueil.add(conteneurBouton3);
 
         setContentPane(panelAccueil);
     }
@@ -63,6 +100,22 @@ public class Fenetre extends JFrame {
 
     public void setControlBoutonJouer(ActionListener al) {
         boutonJouer.addActionListener(al);
+    }
+
+    public void setControlBoutonMenu(ActionListener al) {
+        boutonMenu.addActionListener(al);
+    }
+
+    public void setControlBouton1(ActionListener al) {
+        bouton1.addActionListener(al);
+    }
+
+    public void setControlBouton2(ActionListener al) {
+        bouton2.addActionListener(al);
+    }
+
+    public void setControlBouton3(ActionListener al) {
+        bouton3.addActionListener(al);
     }
 
 

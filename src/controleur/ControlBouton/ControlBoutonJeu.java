@@ -1,4 +1,4 @@
-package controleur;
+package controleur.ControlBouton;
 
 import model.Plateau;
 import vue.Fenetre;
