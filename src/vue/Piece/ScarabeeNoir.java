@@ -10,6 +10,6 @@ public class ScarabeeNoir extends Jeton{
     }
 
     public void paintComponent(Graphics g) {
-        g.drawImage(logo,pos_x,pos_y,taille_x,taille_y,null);
+        g.drawImage(logo,pos_x,pos_y,this.getWidth(), this.getHeight(),null);
     }
 }

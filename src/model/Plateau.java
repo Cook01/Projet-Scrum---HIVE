@@ -1,5 +1,7 @@
 package model;
 
+import model.typePiece.Abeille;
+
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -142,5 +144,37 @@ public class Plateau {
 
 	public Piece getPieceSelectionne() {
 		return pieceSelectionne;
+	}
+
+	public Joueur perdant() {
+		Joueur perdant = null;
+		for(Piece piece : piece_pose) {
+			if(piece instanceof Abeille)
+				if(piece.getVoisinNull().size()==0)
+					if(perdant == null){
+						perdant = piece.getJoueur();
+					} else perdant = null;
+		}
+		return perdant;
+	}
+
+	public boolean egalite() {
+		Joueur perdant = null;
+		for(Piece piece : piece_pose) {
+			if(piece instanceof Abeille)
+				if(piece.getVoisinNull().size()==0)
+					if(perdant == null){
+						perdant = piece.getJoueur();
+					} else return true;
+		}
+		return false;
+	}
+
+	public void reinitialiser() {
+		piece_pose = new ArrayList<Piece>();
+		tour = 1;
+		joueurBlanc = new Joueur("Blanc");
+		joueurNoir = new Joueur("Noir");
+		joueurQuiJoue = joueurBlanc;
 	}
 }

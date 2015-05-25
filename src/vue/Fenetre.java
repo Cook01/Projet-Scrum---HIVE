@@ -3,11 +3,9 @@ package vue;
 import model.Joueur;
 import model.Plateau;
 import vue.ImagePanel.EcranAccueil;
-import vue.ImagePanel.PlateauJeu;
 import vue.Piece.*;
 
 import javax.swing.*;
-import javax.xml.bind.Marshaller;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyListener;
@@ -22,6 +20,8 @@ public class Fenetre extends JFrame {
     private JPanel jpAbeilleBlanc, jpAraigneeBlanc, jpFourmiBlanc, jpSauterelleBlanc, jpScarabeeBlanc;
     private JPanel jpAbeilleNoir, jpAraigneeNoir, jpFourmiNoir, jpSauterelleNoir, jpScarabeeNoir;
     private JPanel jpDefaut;
+    private JPanel jPpastilleBlanc, jPpastilleNoir;
+    private JLabel pastille;
     private Grille grille;
 
 
@@ -101,6 +101,11 @@ public class Fenetre extends JFrame {
         jpScarabeeNoir.add(scarabeeNoir);
 
         jpDefaut = new JPanel();
+        jPpastilleBlanc = new JPanel();
+        jPpastilleBlanc.setPreferredSize(new Dimension(60,60));
+        jPpastilleNoir = new JPanel();
+        jPpastilleNoir.setPreferredSize(new Dimension(60,60));
+        pastille = new Pastille();
 
         grille = new Grille(this);
         grille.setFocusable(true);
@@ -115,7 +120,6 @@ public class Fenetre extends JFrame {
         if(joueur==plateau.getJoueurBlanc())
             jpInventaire.add(new JLabel("Inventaire Blanc"));
         else jpInventaire.add(new JLabel("Inventaire Noir"));
-        caseNomInventaire.add(Box.createVerticalStrut((int)(caseNomInventaire.getHeight()*0.4)), BorderLayout.SOUTH);
         caseNomInventaire.add(jpInventaire, BorderLayout.CENTER);
 
         return jpInventaire;
@@ -175,6 +179,7 @@ public class Fenetre extends JFrame {
                 typePiece = jpDefaut;
                 indicateurPiece.add(new JLabel("Problème du Jeton"));
         }
+
         globInventaire.add(typePiece);
         globInventaire.add(indicateurPiece);
         caseInventaire.add(globInventaire, BorderLayout.CENTER);
@@ -184,36 +189,54 @@ public class Fenetre extends JFrame {
 
 
     private JPanel affichageInventaireJoueurBlanc(){
+        JPanel globalInventaire = new JPanel();
+        globalInventaire.setLayout(new BoxLayout(globalInventaire, BoxLayout.Y_AXIS));
+
         JPanel inventaire = new JPanel();
 
-        inventaire.setLayout(new GridLayout(6, 1));
-        inventaire.setPreferredSize(new Dimension((int) (TAILLE_FENETRE_X * 0.17), TAILLE_FENETRE_Y));
+        inventaire.setLayout(new GridLayout(5, 1));
+        inventaire.setPreferredSize(new Dimension((int) (TAILLE_FENETRE_X * 0.17), (int)(TAILLE_FENETRE_Y*0.8)));
 
-        inventaire.add(caseInventaireNom(plateau.getJoueurBlanc()));
+        if(plateau.getJoueurQuiJoue()==plateau.getJoueurBlanc()) jPpastilleBlanc.add(pastille);
+        else jPpastilleBlanc.removeAll();
+
         inventaire.add(caseInventaire(EnumJeton.AbeilleBlanc));
         inventaire.add(caseInventaire(EnumJeton.AraigneeBlanc));
         inventaire.add(caseInventaire(EnumJeton.FourmiBlanc));
         inventaire.add(caseInventaire(EnumJeton.SauterelleBlanc));
         inventaire.add(caseInventaire(EnumJeton.ScarabeeBlanc));
 
-        return inventaire;
+        globalInventaire.add(jPpastilleBlanc);
+        globalInventaire.add(caseInventaireNom(plateau.getJoueurBlanc()));
+        globalInventaire.add(inventaire);
+
+        return globalInventaire;
     }
 
 
     private JPanel affichageInventaireJoueurNoir(){
+        JPanel globalInventaire = new JPanel();
+        globalInventaire.setLayout(new BoxLayout(globalInventaire, BoxLayout.Y_AXIS));
+
         JPanel inventaire = new JPanel();
 
-        inventaire.setLayout(new GridLayout(6, 1));
+        inventaire.setLayout(new GridLayout(5, 1));
         inventaire.setPreferredSize(new Dimension((int) (TAILLE_FENETRE_X * 0.17), TAILLE_FENETRE_Y));
 
-        inventaire.add(caseInventaireNom(plateau.getJoueurNoir()));
+        if(plateau.getJoueurQuiJoue()==plateau.getJoueurNoir()) jPpastilleNoir.add(pastille);
+        else jPpastilleNoir.removeAll();
+
         inventaire.add(caseInventaire(EnumJeton.AbeilleNoir));
         inventaire.add(caseInventaire(EnumJeton.AraigneeNoir));
         inventaire.add(caseInventaire(EnumJeton.FourmiNoir));
         inventaire.add(caseInventaire(EnumJeton.SauterelleNoir));
         inventaire.add(caseInventaire(EnumJeton.ScarabeeNoir));
 
-        return inventaire;
+        globalInventaire.add(jPpastilleNoir);
+        globalInventaire.add(caseInventaireNom(plateau.getJoueurBlanc()));
+        globalInventaire.add(inventaire);
+
+        return globalInventaire;
     }
 
 
@@ -308,5 +331,9 @@ public class Fenetre extends JFrame {
 
     public Grille getGrille() {
         return grille;
+    }
+
+    public void reinitialiser() {
+        grille.centre = new Point(3,3);
     }
 }

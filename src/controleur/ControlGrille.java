@@ -1,10 +1,12 @@
 package controleur;
 
+import model.Joueur;
 import model.Piece;
 import model.Plateau;
 import model.typePiece.*;
 import vue.Fenetre;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -12,8 +14,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public class ControlGrille implements MouseListener, KeyListener{
-    Fenetre fenetre;
-    Plateau plateau;
+    private Fenetre fenetre;
+    private Plateau plateau;
 
     public ControlGrille(Plateau plateau, Fenetre fenetre) {
         this.plateau = plateau;
@@ -114,7 +116,21 @@ public class ControlGrille implements MouseListener, KeyListener{
                                     plateau.setPieceSelectionne(null);
                                     fenetre.affichagePlateau(false, false);
                                     adaptationPlateauVue();
+                                    Joueur perdant = plateau.perdant();
                                     fenetre.revalidate();
+                                    if(perdant != null || plateau.egalite()) {
+                                        Joueur gagnant;
+                                        if(!plateau.egalite()) {
+                                            if (plateau.getJoueurBlanc() == perdant)
+                                                gagnant = plateau.getJoueurNoir();
+                                            else gagnant = plateau.getJoueurBlanc();
+                                            JOptionPane.showMessageDialog(fenetre, "L'abeille du joueur " + perdant.couleur + " est bloquée.\n Le joueur " + gagnant.couleur + " gagne la partie.", "Game Over", JOptionPane.INFORMATION_MESSAGE);
+                                        } else JOptionPane.showMessageDialog(fenetre, "Les deux abeilles sont bloquées.\n Il y a donc égalité.", "Game Over", JOptionPane.INFORMATION_MESSAGE);
+                                        plateau.reinitialiser();
+                                        fenetre.reinitialiser();
+                                        fenetre.affichagePlateau(false, false);
+                                        fenetre.revalidate();
+                                    }
                                 }
                             }
                         } else {

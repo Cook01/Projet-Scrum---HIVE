@@ -4,7 +4,7 @@ import model.typePiece.*;
 import java.util.ArrayList;
 
 public class Joueur {
-    private final String couleur;
+    public final String couleur;
     private ArrayList<Piece> ensemblePieceDisponible;
 
     public Joueur(String string) {
@@ -109,9 +109,5 @@ public class Joueur {
 
     public ArrayList<Piece> getEnsemblePieceDisponible() {
         return ensemblePieceDisponible;
-    }
-
-    public String getCouleur() {
-        return couleur;
     }
 }
