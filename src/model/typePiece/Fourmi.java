@@ -13,33 +13,47 @@ public class Fourmi extends Piece{
 
     public ArrayListPoint getDeplacementPossible() {
         ArrayListPoint deplacementPossible = new ArrayListPoint();
-        ArrayListPoint tmpDeplacement = new ArrayListPoint();
-        ArrayListPoint voisinLibre = getVoisinNull();
+        ArrayList<Piece> pieceBord = getBords(new ArrayList<Piece>(), new ArrayList<Piece>());
         if(peutSeDeplacer()) {
-            if(dessus!=null){
-                tmpDeplacement.addAll(dessus.getVoisinNull());
-            }
-            if(dessus_droite!=null){
-                tmpDeplacement.addAll(dessus_droite.getVoisinNull());
-            }
-            if(dessous_droite!=null){
-                tmpDeplacement.addAll(dessous_droite.getVoisinNull());
-            }
-            if(dessous!=null){
-                tmpDeplacement.addAll(dessous.getVoisinNull());
-            }
-            if(dessous_gauche!=null){
-                tmpDeplacement.addAll(dessous_gauche.getVoisinNull());
-            }
-            if(dessus_gauche!=null){
-                tmpDeplacement.addAll(dessus_gauche.getVoisinNull());
-            }
-        }
-        for(Point point : voisinLibre) {
-            if(tmpDeplacement.contient(point)) {
-                deplacementPossible.add(point);
+            for(Piece bord : pieceBord){
+            	deplacementPossible.addAll(dessus_gauche.getVoisinNull());
             }
         }
         return deplacementPossible;
+    }
+
+    public ArrayList<Piece> getBords(ArrayList<Piece> pieceBord, ArrayList<Piece> pieceDejaCheck){
+
+    	if(getVoisinNull().size() >= 1){
+    		pieceBord.add(this);
+    	}
+
+    	pieceDejaCheck.add(this);
+
+    	if(dessus != NULL && pieceDejaCheck.indexOf(dessus) == -1){
+    		pieceBord = dessus.getBords(pieceBord, pieceDejaCheck);
+    	}
+
+    	if(dessus_droite != NULL && pieceDejaCheck.indexOf(dessus_droite) == -1){
+    		pieceBord = dessus_droite.getBords(pieceBord, pieceDejaCheck);
+    	}
+
+    	if(dessous_droite != NULL && pieceDejaCheck.indexOf(dessous_droite) == -1){
+    		pieceBord = dessous_droite.getBords(pieceBord, pieceDejaCheck);
+    	}
+
+    	if(dessous != NULL && pieceDejaCheck.indexOf(dessous) == -1){
+    		pieceBord = dessous.getBords(pieceBord, pieceDejaCheck);
+    	}
+
+    	if(dessous_gauche != NULL && pieceDejaCheck.indexOf(dessous_gauche) == -1){
+    		pieceBord = dessous_gauche.getBords(pieceBord, pieceDejaCheck);
+    	}
+
+    	if(dessus_gauche != NULL && pieceDejaCheck.indexOf(dessus_gauche) == -1){
+    		pieceBord = dessus_gauche.getBords(pieceBord, pieceDejaCheck);
+    	}
+
+    	return pieceBord;
     }
 }
