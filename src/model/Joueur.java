@@ -106,8 +106,4 @@ public class Joueur {
         ensemblePieceDisponible.remove(selection);
         return selection;
     }
-
-    public ArrayList<Piece> getEnsemblePieceDisponible() {
-        return ensemblePieceDisponible;
-    }
 }

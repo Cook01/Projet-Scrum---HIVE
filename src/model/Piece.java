@@ -88,7 +88,18 @@ public abstract class Piece {
         }
     }
 
-    public abstract ArrayListPoint getDeplacementPossible();
+    public void retireVoisin(Piece piece) {
+        if(dessus == piece) dessus = null;
+        else if(dessus_droite == piece) dessus_droite = null;
+        else if(dessous_droite == piece) dessous_droite = null;
+        else if(dessous == piece) dessous = null;
+        else if(dessous_gauche == piece) dessous_gauche = null;
+        else if(dessus_gauche == piece) dessus_gauche = null;
+    }
+
+    public void nettoyerVoisin() {
+        dessus = dessus_droite = dessous_droite = dessous = dessous_gauche = dessus_gauche = null;
+    }
 
     protected boolean peutSeDeplacer(){
         ArrayListPoint pointLibre = getVoisinNull();
@@ -124,47 +135,6 @@ public abstract class Piece {
         return pointLibre.size() == 5;
     }
 
-    public Piece getDessus() {
-        return dessus;
-    }
-
-    public Piece getDessus_droite() {
-        return dessus_droite;
-    }
-
-    public Piece getDessous() {
-        return dessous;
-    }
-
-    public Piece getDessous_droite() {
-        return dessous_droite;
-    }
-
-    public Piece getDessous_gauche() {
-        return dessous_gauche;
-    }
-
-    public Piece getDessus_gauche() {
-        return dessus_gauche;
-    }
-
-    public Joueur getJoueur() {
-        return joueur;
-    }
-
-    public void retireVoisin(Piece piece) {
-        if(dessus == piece) dessus = null;
-        else if(dessus_droite == piece) dessus_droite = null;
-        else if(dessous_droite == piece) dessous_droite = null;
-        else if(dessous == piece) dessous = null;
-        else if(dessous_gauche == piece) dessous_gauche = null;
-        else if(dessus_gauche == piece) dessus_gauche = null;
-    }
-
-    public void nettoyerVoisin() {
-        dessus = dessus_droite = dessous_droite = dessous = dessous_gauche = dessus_gauche = null;
-    }
-
     protected ArrayList<Piece> getBords(ArrayList<Piece> pieceBord, ArrayList<Piece> pieceDejaCheck){
 
         if(getVoisinNull().size() >= 1){
@@ -198,5 +168,35 @@ public abstract class Piece {
         }
 
         return pieceBord;
+    }
+
+    public abstract ArrayListPoint getDeplacementPossible();
+
+    public Piece getDessus() {
+        return dessus;
+    }
+
+    public Piece getDessus_droite() {
+        return dessus_droite;
+    }
+
+    public Piece getDessous() {
+        return dessous;
+    }
+
+    public Piece getDessous_droite() {
+        return dessous_droite;
+    }
+
+    public Piece getDessous_gauche() {
+        return dessous_gauche;
+    }
+
+    public Piece getDessus_gauche() {
+        return dessus_gauche;
+    }
+
+    public Joueur getJoueur() {
+        return joueur;
     }
 }
