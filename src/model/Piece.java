@@ -3,6 +3,7 @@ package model;
 import model.typePiece.TypePieceEnum;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public abstract class Piece {
     public final TypePieceEnum typePiece;
@@ -52,7 +53,8 @@ public abstract class Piece {
                 voisinNull.add(new Point(position.x - 1, position.y));
             } else {
                 voisinNull.add(new Point(position.x - 1, position.y - 1));
-            }        }
+            }
+        }
         if(dessus_gauche==null) {
             if(position.x%2==0) {
                 voisinNull.add(new Point(position.x - 1, position.y + 1));
@@ -161,5 +163,40 @@ public abstract class Piece {
 
     public void nettoyerVoisin() {
         dessus = dessus_droite = dessous_droite = dessous = dessous_gauche = dessus_gauche = null;
+    }
+
+    protected ArrayList<Piece> getBords(ArrayList<Piece> pieceBord, ArrayList<Piece> pieceDejaCheck){
+
+        if(getVoisinNull().size() >= 1){
+            pieceBord.add(this);
+        }
+
+        pieceDejaCheck.add(this);
+
+        if(dessus != null && pieceDejaCheck.indexOf(dessus) == -1){
+            pieceBord = dessus.getBords(pieceBord, pieceDejaCheck);
+        }
+
+        if(dessus_droite != null && pieceDejaCheck.indexOf(dessus_droite) == -1){
+            pieceBord = dessus_droite.getBords(pieceBord, pieceDejaCheck);
+        }
+
+        if(dessous_droite != null && pieceDejaCheck.indexOf(dessous_droite) == -1){
+            pieceBord = dessous_droite.getBords(pieceBord, pieceDejaCheck);
+        }
+
+        if(dessous != null && pieceDejaCheck.indexOf(dessous) == -1){
+            pieceBord = dessous.getBords(pieceBord, pieceDejaCheck);
+        }
+
+        if(dessous_gauche != null && pieceDejaCheck.indexOf(dessous_gauche) == -1){
+            pieceBord = dessous_gauche.getBords(pieceBord, pieceDejaCheck);
+        }
+
+        if(dessus_gauche != null && pieceDejaCheck.indexOf(dessus_gauche) == -1){
+            pieceBord = dessus_gauche.getBords(pieceBord, pieceDejaCheck);
+        }
+
+        return pieceBord;
     }
 }
