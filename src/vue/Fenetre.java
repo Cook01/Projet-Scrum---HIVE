@@ -275,7 +275,7 @@ public class Fenetre extends JFrame {
         inventaire.add(caseInventaire(EnumJeton.ScarabeeNoir));
 
         globalInventaire.add(jPpastilleNoir);
-        globalInventaire.add(caseInventaireNom(plateau.getJoueurBlanc()));
+        globalInventaire.add(caseInventaireNom(plateau.getJoueurNoir()));
         globalInventaire.add(inventaire);
 
         return globalInventaire;

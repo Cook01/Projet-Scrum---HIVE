@@ -14,10 +14,14 @@ public class Fourmi extends Piece{
     public ArrayListPoint getDeplacementPossible() {
         ArrayListPoint deplacementPossible = new ArrayListPoint();
         ArrayList<Piece> pieceBord = getBords(new ArrayList<Piece>(), new ArrayList<Piece>());
+
+        pieceBord.remove(this);
+
         if(peutSeDeplacer()) {
             for(Piece bord : pieceBord){
             	deplacementPossible.addAll(bord.getVoisinNull());
             }
+            deplacementPossible.remove(this.getPosition());
         }
         return deplacementPossible;
     }
