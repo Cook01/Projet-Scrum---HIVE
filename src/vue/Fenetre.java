@@ -40,6 +40,7 @@ public class Fenetre extends JFrame {
         affichageEcranAccueil();
     }
 
+
     private void initialiseEcranMenu() {
         boutonJouer = new JButton("Démarrer");
         bouton1 = new JButton("Bouton 1");

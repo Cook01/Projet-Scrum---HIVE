@@ -1,6 +1,7 @@
 package model;
 
 import model.typePiece.Abeille;
+import model.typePiece.Scarabee;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -22,10 +23,16 @@ public class Plateau {
 	public void placer(Piece piece, Point point) {
 		if(piece_pose.size()==0 && point.equals(new Point(0,0))) {
 			piece_pose.add(piece);
-			piece.setPosition(point);
+			if(piece instanceof Scarabee)
+				((Scarabee) piece).setPosition(point, this);
+			else
+				piece.setPosition(point);
 		} else if ( piece_pose.size()>0 && this.estPlacementPossible(point)) {
 			piece_pose.add(piece);
-			piece.setPosition(point);
+			if(piece instanceof Scarabee)
+				((Scarabee) piece).setPosition(point, this);
+			else
+				piece.setPosition(point);
 			this.setDependance(point, piece);
 		}
 	}
@@ -100,12 +107,15 @@ public class Plateau {
 	private void deplacer(Piece piece, Point point) {
 		if ( piece_pose.size()>0 && piece.getDeplacementPossible()!=null && piece.getDeplacementPossible().contient(point)) {
 			casserDependance(piece);
-			piece.setPosition(point);
+			if(piece instanceof Scarabee)
+				((Scarabee) piece).setPosition(point, this);
+			else
+				piece.setPosition(point);
 			setDependance(point, piece);
 		}
 	}
 
-	private void casserDependance(Piece piece) {
+	public void casserDependance(Piece piece) {
 		for(Piece chaquePiece : piece_pose) {
 			chaquePiece.retireVoisin(piece);
 		}
@@ -124,12 +134,31 @@ public class Plateau {
 		return piece_pose;
 	}
 
+	public Piece getPiece(Point point, Joueur j) {
+		Piece a  = null;
+		for(Piece chaquePiece : piece_pose) {
+			if (point.equals(chaquePiece.getPosition()) && chaquePiece.getJoueur().equals(j)) {
+				a = chaquePiece;
+				while (a.getSky() != null)
+					a = a.getSky();
+				if (a.getJoueur() == j)
+					return a;
+			}
+		}
+		return null;
+	}
+
 	public Piece getPiece(Point point) {
-		Piece piece = null;
-		for(Piece chaquePiece : piece_pose)
-			if(chaquePiece.getPosition().equals(point))
-				piece = chaquePiece;
-		return piece;
+		Piece a;
+		for(Piece chaquePiece : piece_pose) {
+			if (point.equals(chaquePiece.getPosition())) {
+				a = chaquePiece;
+				while (a.getSky() != null)
+					a = a.getSky();
+				return a;
+			}
+		}
+		return null;
 	}
 
 	public Joueur getJoueurQuiJoue() {

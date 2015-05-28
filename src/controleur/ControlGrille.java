@@ -133,7 +133,7 @@ public class ControlGrille implements MouseListener, KeyListener{
                                         invalide = true;
                                     }
                                     for(Piece chaquePiece : plateau.getPiece_pose())
-                                        if(chaquePiece.getPosition().equals(position))
+                                        if(chaquePiece.getPosition().equals(position) && !(tmpPiece instanceof Scarabee))
                                             invalide = true;
                                 }
                                 if (!invalide) {
@@ -160,9 +160,9 @@ public class ControlGrille implements MouseListener, KeyListener{
                                 }
                             }
                         } else {
-                            if(plateau.getJoueurQuiJoue() == plateau.getPiece(position).getJoueur()) {
+                            if(plateau.getPiece(position, plateau.getJoueurQuiJoue()) != null) {
                                 if(plateau.tour!=4 || plateau.getJoueurQuiJoue().nbAbeilleDisponible()==0) {
-                                    plateau.setPieceSelectionne(plateau.getPiece(position));
+                                    plateau.setPieceSelectionne(plateau.getPiece(position, plateau.getJoueurQuiJoue()));
                                     fenetre.affichagePlateau(false, true);
                                     fenetre.revalidate();
                                 }
