@@ -76,23 +76,28 @@ public abstract class Piece {
 
     public void setVoisin(Point point, Piece piece) {
         if(point.x == position.x ) {
-            if(point.y == position.y + 1) dessus = piece;
-            else dessous = piece;
+            if(point.y == position.y + 1) {
+                if (dessus == null) dessus = piece;
+            }else if(dessous==null)dessous = piece;
         }else if (point.x == position.x + 1) {
             if(position.x%2==0) {
-                if(point.y == position.y + 1) dessus_droite = piece;
-                else dessous_droite = piece;
+                if(point.y == position.y + 1) {
+                    if (dessus_droite == null) dessus_droite = piece;
+                } else if(dessous_droite==null) dessous_droite = piece;
             } else {
-                if(point.y == position.y) dessus_droite = piece;
-                else dessous_droite = piece;
+                if(point.y == position.y) {
+                    if (dessus_droite == null) dessus_droite = piece;
+                } else if(dessous_droite==null)dessous_droite = piece;
             }
         } else {
             if(position.x%2==0) {
-                if(point.y == position.y + 1) dessus_gauche = piece;
-                else dessous_gauche = piece;
+                if(point.y == position.y + 1) {
+                    if (dessus_gauche == null) dessus_gauche = piece;
+                } else if(dessous_gauche==null) dessous_gauche = piece;
             } else {
-                if(point.y == position.y) dessus_gauche = piece;
-                else dessous_gauche = piece;
+                if(point.y == position.y) {
+                    if (dessus_gauche == null) dessus_gauche = piece;
+                } else if(dessous_gauche==null) dessous_gauche = piece;
             }
         }
     }
@@ -104,6 +109,7 @@ public abstract class Piece {
         else if(dessous == piece) dessous = null;
         else if(dessous_gauche == piece) dessous_gauche = null;
         else if(dessus_gauche == piece) dessus_gauche = null;
+        else if(sky == piece) sky = null;
     }
 
     public void nettoyerVoisin() {

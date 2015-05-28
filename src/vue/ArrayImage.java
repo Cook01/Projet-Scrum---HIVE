@@ -68,6 +68,7 @@ public class ArrayImage {
 
     private Image associationImage(Piece piece) {
         Image image;
+        if(piece.getSky()!=null) return null;
         if(piece.getJoueur()==plateau.getJoueurBlanc()) {
             switch (piece.typePiece) {
                 case Abeille:

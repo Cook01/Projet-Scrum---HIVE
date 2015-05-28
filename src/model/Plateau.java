@@ -148,6 +148,19 @@ public class Plateau {
 		return null;
 	}
 
+	public Piece getPiece(Point point) {
+		Piece a;
+		for(Piece chaquePiece : piece_pose) {
+			if (point.equals(chaquePiece.getPosition())) {
+				a = chaquePiece;
+				while (a.getSky() != null)
+					a = a.getSky();
+				return a;
+			}
+		}
+		return null;
+	}
+
 	public Joueur getJoueurQuiJoue() {
 		return joueurQuiJoue;
 	}

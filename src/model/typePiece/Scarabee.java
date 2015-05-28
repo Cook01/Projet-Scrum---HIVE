@@ -21,7 +21,7 @@ public class Scarabee extends Piece{
             j = p.getJoueurNoir();
         else
             j = p.getJoueurBlanc();
-        a = p.getPiece(point, j);
+        a = p.getPiece(point);
         if(a != null) {
             this.ground = a;
             a.setSky(this);
