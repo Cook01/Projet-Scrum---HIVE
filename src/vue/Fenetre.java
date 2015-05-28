@@ -3,6 +3,7 @@ package vue;
 import model.Joueur;
 import model.Plateau;
 import vue.ImagePanel.EcranAccueil;
+import vue.ImagePanel.RucheBlanc;
 import vue.Piece.*;
 
 import javax.swing.*;
@@ -156,10 +157,15 @@ public class Fenetre extends JFrame {
 
         jpDefaut = new JPanel();
         jPpastilleBlanc = new JPanel();
-        jPpastilleBlanc.setPreferredSize(new Dimension(60,60));
+        jPpastilleBlanc.setPreferredSize(new Dimension(60,70));
         jPpastilleNoir = new JPanel();
-        jPpastilleNoir.setPreferredSize(new Dimension(60,60));
+        jPpastilleNoir.setPreferredSize(new Dimension(60,70));
         pastille = new Pastille();
+
+        jpDefaut.setOpaque(false);
+        pastille.setOpaque(false);
+        jPpastilleBlanc.setOpaque(false);
+        jPpastilleNoir.setOpaque(false);
 
         grille = new Grille(this);
         grille.setFocusable(true);
@@ -170,10 +176,13 @@ public class Fenetre extends JFrame {
         JPanel jpInventaire = new JPanel();
         JPanel caseNomInventaire = new JPanel();
 
+        jpInventaire.setOpaque(false);
+        caseNomInventaire.setOpaque(false);
         caseNomInventaire.setLayout(new BorderLayout());
         if(joueur==plateau.getJoueurBlanc())
             jpInventaire.add(new JLabel("Inventaire Blanc"));
         else jpInventaire.add(new JLabel("Inventaire Noir"));
+        jpInventaire.getComponent(0).setForeground(Color.GREEN);
         caseNomInventaire.add(jpInventaire, BorderLayout.CENTER);
 
         return jpInventaire;
@@ -185,6 +194,10 @@ public class Fenetre extends JFrame {
         JPanel typePiece;
         JPanel globInventaire = new JPanel();
         JPanel caseInventaire = new JPanel();
+
+        indicateurPiece.setOpaque(false);
+        globInventaire.setOpaque(false);
+        caseInventaire.setOpaque(false);
 
         globInventaire.setLayout(new BoxLayout(globInventaire, BoxLayout.Y_AXIS));
         caseInventaire.setLayout(new BorderLayout());
@@ -224,6 +237,8 @@ public class Fenetre extends JFrame {
                 indicateurPiece.add(new JLabel("Problème du Jeton"));
         }
 
+        typePiece.setOpaque(false);
+
         globInventaire.add(typePiece);
         caseInventaire.add(globInventaire, BorderLayout.CENTER);
 
@@ -232,13 +247,14 @@ public class Fenetre extends JFrame {
 
 
     private JPanel affichageInventaireJoueurBlanc(){
-        JPanel globalInventaire = new JPanel();
+        JPanel globalInventaire = new RucheBlanc();
         globalInventaire.setLayout(new BoxLayout(globalInventaire, BoxLayout.Y_AXIS));
 
         JPanel inventaire = new JPanel();
+        inventaire.setOpaque(false);
 
         inventaire.setLayout(new GridLayout(5, 1));
-        inventaire.setPreferredSize(new Dimension((int) (TAILLE_FENETRE_X * 0.17), (int)(TAILLE_FENETRE_Y*0.8)));
+        inventaire.setPreferredSize(new Dimension((int) (TAILLE_FENETRE_X * 0.17), (int)(TAILLE_FENETRE_Y-TAILLE_FENETRE_Y*0.1)));
 
         if(plateau.getJoueurQuiJoue()==plateau.getJoueurBlanc()) jPpastilleBlanc.add(pastille);
         else jPpastilleBlanc.removeAll();
@@ -258,10 +274,11 @@ public class Fenetre extends JFrame {
 
 
     private JPanel affichageInventaireJoueurNoir(){
-        JPanel globalInventaire = new JPanel();
+        JPanel globalInventaire = new RucheBlanc();
         globalInventaire.setLayout(new BoxLayout(globalInventaire, BoxLayout.Y_AXIS));
 
         JPanel inventaire = new JPanel();
+        inventaire.setOpaque(false);
 
         inventaire.setLayout(new GridLayout(5, 1));
         inventaire.setPreferredSize(new Dimension((int) (TAILLE_FENETRE_X * 0.17), TAILLE_FENETRE_Y));
