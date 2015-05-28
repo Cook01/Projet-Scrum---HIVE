@@ -62,6 +62,7 @@ public class PlateauTest {
                 Assert.assertNull(fourmi.getPosition());
         }
 
+        /***** Jouer : tours *****/
         @Test
         public void posee_piece_premier_tour() {
                 Plateau plateau = new Plateau();
@@ -163,55 +164,59 @@ public class PlateauTest {
 
         /***** estPlacementPossible ******/
         @Test
-        public void liste_placement_possible() {
+        public void liste_placement_plateau_vide() {
                 Plateau plateau = new Plateau();
-                Abeille abeille = new Abeille(new Joueur("Blanc"));
-
-                plateau.placer(abeille, new Point(0,0));
-                Assert.assertTrue(abeille.getVoisinNull().contains(new Point(0, 1)));
-                Assert.assertTrue(abeille.getVoisinNull().contains(new Point(1, 1)));
-                Assert.assertTrue(abeille.getVoisinNull().contains(new Point(1, 0)));
-                Assert.assertTrue(abeille.getVoisinNull().contains(new Point(0, -1)));
-                Assert.assertTrue(abeille.getVoisinNull().contains(new Point(-1, 1)));
-                Assert.assertTrue(abeille.getVoisinNull().contains(new Point(-1, 0)));
+                Assert.assertTrue(plateau.getPlacementPossible().contains(new Point(0, 0)));
         }
 
         @Test
-        public void liste_placement_possible_avec_une_piece_autour() {
+        public void liste_placement_plateau_une_piece() {
                 Plateau plateau = new Plateau();
-                Abeille abeille = new Abeille(new Joueur("Blanc"));
-                Fourmi fourmi = new Fourmi(new Joueur("Blanc"));
+                plateau.placer(new Abeille(new Joueur("blanc")), new Point(0, 0));
+                Assert.assertTrue(plateau.getPlacementPossible().size()==6);
+                Assert.assertTrue(plateau.getPlacementPossible().contient(new Point(1, 0)));
+                Assert.assertTrue(plateau.getPlacementPossible().contient(new Point(1, 1)));
+                Assert.assertTrue(plateau.getPlacementPossible().contient(new Point(0, 1)));
+                Assert.assertTrue(plateau.getPlacementPossible().contient(new Point(-1, 1)));
+                Assert.assertTrue(plateau.getPlacementPossible().contient(new Point(-1, -0)));
+                Assert.assertTrue(plateau.getPlacementPossible().contient(new Point(0, -1)));
+        }
 
-                plateau.placer(abeille, new Point(0, 0));
-                plateau.placer(fourmi, new Point(0, 1));
-                Assert.assertFalse(abeille.getVoisinNull().contains(new Point(0, 1)));
-                Assert.assertTrue(abeille.getVoisinNull().contains(new Point(1, 1)));
-                Assert.assertTrue(abeille.getVoisinNull().contains(new Point(1, 0)));
-                Assert.assertTrue(abeille.getVoisinNull().contains(new Point(0, -1)));
-                Assert.assertTrue(abeille.getVoisinNull().contains(new Point(-1, 1)));
-                Assert.assertTrue(abeille.getVoisinNull().contains(new Point(-1, 0)));
+        /***** Enlever dépendances *****/
+        @Test
+        public void enlever_dependance_inexistante() {
+                Plateau plateau = new Plateau();
+                Piece piece = new Abeille(new Joueur("blanc"));
+                plateau.placer(piece, new Point(0, 0));
+                Piece piece1 = new Abeille(new Joueur("blanc"));
+                plateau.placer(piece1, new Point(2, 2));
+                plateau.casserDependance(piece1);
+                Assert.assertTrue(piece.getVoisinNull().size()==6);
+        }
+
+
+        @Test
+        public void enlever_dependance_existante() {
+                Plateau plateau = new Plateau();
+                Piece piece = new Abeille(new Joueur("blanc"));
+                plateau.placer(piece, new Point(0, 0));
+                Piece piece1 = new Abeille(new Joueur("blanc"));
+                plateau.placer(piece1, new Point(0, 1));
+                plateau.casserDependance(piece1);
+                Assert.assertTrue(piece.getVoisinNull().size()==6);
         }
 
         @Test
-        public void liste_placement_possible_vide() {
+        public void enlever_dependance_existante_avec_depence_restante() {
                 Plateau plateau = new Plateau();
-                Abeille abeille = new Abeille(new Joueur("Blanc"));
-                Fourmi fourmi1 = new Fourmi(new Joueur("Blanc"));
-                Fourmi fourmi2 = new Fourmi(new Joueur("Blanc"));
-                Fourmi fourmi3 = new Fourmi(new Joueur("Blanc"));
-                Fourmi fourmi4 = new Fourmi(new Joueur("Blanc"));
-                Fourmi fourmi5 = new Fourmi(new Joueur("Blanc"));
-                Fourmi fourmi6 = new Fourmi(new Joueur("Blanc"));
-
-                plateau.placer(abeille, new Point(0, 0));
-                plateau.placer(fourmi1, new Point(0, 1));
-                plateau.placer(fourmi2, new Point(1, 1));
-                plateau.placer(fourmi3, new Point(1, 0));
-                plateau.placer(fourmi4, new Point(0, -1));
-                plateau.placer(fourmi5, new Point(-1, 1));
-                plateau.placer(fourmi6, new Point(-1, 0));
-                Assert.assertTrue(abeille.getVoisinNull().size() == 0);
+                Piece piece = new Abeille(new Joueur("blanc"));
+                plateau.placer(piece, new Point(0, 0));
+                Piece piece1 = new Abeille(new Joueur("blanc"));
+                plateau.placer(piece1, new Point(0, 1));
+                Piece piece2 = new Abeille(new Joueur("blanc"));
+                plateau.placer(piece2, new Point(0, -1));
+                plateau.casserDependance(piece1);
+                Assert.assertTrue(piece.getVoisinNull().size()==5);
+                Assert.assertFalse(piece.getVoisinNull().contient(new Point(0, -1)));
         }
-
-
 }
