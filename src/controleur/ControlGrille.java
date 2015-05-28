@@ -17,7 +17,6 @@ import java.awt.event.MouseListener;
 public class ControlGrille implements MouseListener, KeyListener{
     private Fenetre fenetre;
     private Plateau plateau;
-    private Jeton jeton;
 
     public ControlGrille(Plateau plateau, Fenetre fenetre) {
         this.plateau = plateau;
@@ -80,6 +79,7 @@ public class ControlGrille implements MouseListener, KeyListener{
                                 Piece tmpPiece = piece;
                                 if(piece.getPosition()==null) {
                                     if (plateau.getPlacementPossible().contient(position)) {
+                                        Jeton jeton;
                                         if (piece.getJoueur() == plateau.getJoueurBlanc()) {
                                             if (piece instanceof Abeille) {
                                                 tmpPiece = plateau.getJoueurBlanc().getAbeille();

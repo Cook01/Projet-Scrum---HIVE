@@ -399,6 +399,39 @@ public class Fenetre extends JFrame {
     }
 
     public void reinitialiser() {
+        JLabel abeilleBlanc = new AbeilleBlanc();
+        JLabel araigneeBlanc = new AraigneeBlanc();
+        JLabel fourmiBlanc = new FourmiBlanc();
+        JLabel sauterelleBlanc = new SauterelleBlanc();
+        JLabel scarabeeBlanc = new ScarabeeBlanc();
+        JLabel abeilleNoir = new AbeilleNoir();
+        JLabel araigneeNoir = new AraigneeNoir();
+        JLabel fourmiNoir = new FourmiNoir();
+        JLabel sauterelleNoir = new SauterelleNoir();
+        JLabel scarabeeNoir = new ScarabeeNoir();
+
+        jpAbeilleBlanc.removeAll();
+        jpAbeilleBlanc.add(abeilleBlanc);
+        jpAraigneeBlanc.removeAll();
+        jpAraigneeBlanc.add(araigneeBlanc);
+        jpFourmiBlanc.removeAll();
+        jpFourmiBlanc.add(fourmiBlanc);
+        jpSauterelleBlanc.removeAll();
+        jpSauterelleBlanc.add(sauterelleBlanc);
+        jpScarabeeBlanc.removeAll();
+        jpScarabeeBlanc.add(scarabeeBlanc);
+
+        jpAbeilleNoir.removeAll();
+        jpAbeilleNoir.add(abeilleNoir);
+        jpAraigneeNoir.removeAll();
+        jpAraigneeNoir.add(araigneeNoir);
+        jpFourmiNoir.removeAll();
+        jpFourmiNoir.add(fourmiNoir);
+        jpSauterelleNoir.removeAll();
+        jpSauterelleNoir.add(sauterelleNoir);
+        jpScarabeeNoir.removeAll();
+        jpScarabeeNoir.add(scarabeeNoir);
+
         grille.centre = new Point(3,3);
     }
 }
