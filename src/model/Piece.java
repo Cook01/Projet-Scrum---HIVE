@@ -3,6 +3,7 @@ package model;
 import model.typePiece.TypePieceEnum;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public abstract class Piece {
     public final TypePieceEnum typePiece;
@@ -52,7 +53,8 @@ public abstract class Piece {
                 voisinNull.add(new Point(position.x - 1, position.y));
             } else {
                 voisinNull.add(new Point(position.x - 1, position.y - 1));
-            }        }
+            }
+        }
         if(dessus_gauche==null) {
             if(position.x%2==0) {
                 voisinNull.add(new Point(position.x - 1, position.y + 1));
@@ -86,7 +88,18 @@ public abstract class Piece {
         }
     }
 
-    public abstract ArrayListPoint getDeplacementPossible();
+    public void retireVoisin(Piece piece) {
+        if(dessus == piece) dessus = null;
+        else if(dessus_droite == piece) dessus_droite = null;
+        else if(dessous_droite == piece) dessous_droite = null;
+        else if(dessous == piece) dessous = null;
+        else if(dessous_gauche == piece) dessous_gauche = null;
+        else if(dessus_gauche == piece) dessus_gauche = null;
+    }
+
+    public void nettoyerVoisin() {
+        dessus = dessus_droite = dessous_droite = dessous = dessous_gauche = dessus_gauche = null;
+    }
 
     protected boolean peutSeDeplacer(){
         ArrayListPoint pointLibre = getVoisinNull();
@@ -122,6 +135,43 @@ public abstract class Piece {
         return pointLibre.size() == 5;
     }
 
+    protected ArrayList<Piece> getBords(ArrayList<Piece> pieceBord, ArrayList<Piece> pieceDejaCheck){
+
+        if(getVoisinNull().size() >= 1){
+            pieceBord.add(this);
+        }
+
+        pieceDejaCheck.add(this);
+
+        if(dessus != null && pieceDejaCheck.indexOf(dessus) == -1){
+            pieceBord = dessus.getBords(pieceBord, pieceDejaCheck);
+        }
+
+        if(dessus_droite != null && pieceDejaCheck.indexOf(dessus_droite) == -1){
+            pieceBord = dessus_droite.getBords(pieceBord, pieceDejaCheck);
+        }
+
+        if(dessous_droite != null && pieceDejaCheck.indexOf(dessous_droite) == -1){
+            pieceBord = dessous_droite.getBords(pieceBord, pieceDejaCheck);
+        }
+
+        if(dessous != null && pieceDejaCheck.indexOf(dessous) == -1){
+            pieceBord = dessous.getBords(pieceBord, pieceDejaCheck);
+        }
+
+        if(dessous_gauche != null && pieceDejaCheck.indexOf(dessous_gauche) == -1){
+            pieceBord = dessous_gauche.getBords(pieceBord, pieceDejaCheck);
+        }
+
+        if(dessus_gauche != null && pieceDejaCheck.indexOf(dessus_gauche) == -1){
+            pieceBord = dessus_gauche.getBords(pieceBord, pieceDejaCheck);
+        }
+
+        return pieceBord;
+    }
+
+    public abstract ArrayListPoint getDeplacementPossible();
+
     public Piece getDessus() {
         return dessus;
     }
@@ -148,18 +198,5 @@ public abstract class Piece {
 
     public Joueur getJoueur() {
         return joueur;
-    }
-
-    public void retireVoisin(Piece piece) {
-        if(dessus == piece) dessus = null;
-        else if(dessus_droite == piece) dessus_droite = null;
-        else if(dessous_droite == piece) dessous_droite = null;
-        else if(dessous == piece) dessous = null;
-        else if(dessous_gauche == piece) dessous_gauche = null;
-        else if(dessus_gauche == piece) dessus_gauche = null;
-    }
-
-    public void nettoyerVoisin() {
-        dessus = dessus_droite = dessous_droite = dessous = dessous_gauche = dessus_gauche = null;
     }
 }

@@ -46,4 +46,10 @@ public class ArrayListPointTest {
         arrayListPoint.retirer(point);
         Assert.assertFalse(arrayListPoint.contient(new Point(5, 7)));
     }
+
+    @Test
+    public void retirer_un_point_echec(){
+        ArrayListPoint arrayListPoint = new ArrayListPoint();
+        arrayListPoint.retirer(new Point(5, 0));
+    }
 }

@@ -5,6 +5,7 @@ import model.Piece;
 import model.Plateau;
 import model.typePiece.*;
 import vue.Fenetre;
+import vue.Piece.Jeton;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,6 +29,7 @@ public class ControlGrille implements MouseListener, KeyListener{
         boolean invalide = false;
         if(e.getButton() == MouseEvent.BUTTON3) {
             plateau.setPieceSelectionne(null);
+            fenetre.deselection();
             fenetre.affichagePlateau(false, false);
             fenetre.revalidate();
         } else {
@@ -77,28 +79,51 @@ public class ControlGrille implements MouseListener, KeyListener{
                                 Piece tmpPiece = piece;
                                 if(piece.getPosition()==null) {
                                     if (plateau.getPlacementPossible().contient(position)) {
+                                        Jeton jeton;
                                         if (piece.getJoueur() == plateau.getJoueurBlanc()) {
-                                            if (piece instanceof Abeille)
+                                            if (piece instanceof Abeille) {
                                                 tmpPiece = plateau.getJoueurBlanc().getAbeille();
-                                            else if (piece instanceof Araignee)
+                                                jeton = (Jeton)(fenetre.getJpAbeilleBlanc().getComponent(0));
+                                                jeton.decremente();
+                                            } else if (piece instanceof Araignee) {
                                                 tmpPiece = plateau.getJoueurBlanc().getAraignee();
-                                            else if (piece instanceof Fourmi)
+                                                jeton = (Jeton)(fenetre.getJpAraigneeBlanc().getComponent(0));
+                                                jeton.decremente();
+                                            } else if (piece instanceof Fourmi) {
                                                 tmpPiece = plateau.getJoueurBlanc().getFourmi();
-                                            else if (piece instanceof Sauterelle)
-                                                tmpPiece = plateau.getJoueurBlanc().getSauterelle();
-                                            else if (piece instanceof Scarabee)
+                                                jeton = (Jeton)(fenetre.getJpFourmiBlanc().getComponent(0));
+                                                jeton.decremente();
+                                            } else if (piece instanceof Sauterelle) {
+                                            tmpPiece = plateau.getJoueurBlanc().getSauterelle();
+                                                jeton = (Jeton)(fenetre.getJpSauterelleBlanc().getComponent(0));
+                                                jeton.decremente();
+                                            } else if (piece instanceof Scarabee) {
                                                 tmpPiece = plateau.getJoueurBlanc().getScarabe();
+                                                jeton = (Jeton)(fenetre.getJpScarabeeBlanc().getComponent(0));
+                                                jeton.decremente();
+                                            }
                                         } else {
-                                            if (piece instanceof Abeille)
+                                            if (piece instanceof Abeille) {
                                                 tmpPiece = plateau.getJoueurNoir().getAbeille();
-                                            else if (piece instanceof Araignee)
+                                                jeton = (Jeton)(fenetre.getJpAbeilleNoir().getComponent(0));
+                                                jeton.decremente();
+                                            } else if (piece instanceof Araignee) {
                                                 tmpPiece = plateau.getJoueurNoir().getAraignee();
-                                            else if (piece instanceof Fourmi)
+                                                jeton = (Jeton)(fenetre.getJpAraigneeNoir().getComponent(0));
+                                                jeton.decremente();
+                                            } else if (piece instanceof Fourmi) {
                                                 tmpPiece = plateau.getJoueurNoir().getFourmi();
-                                            else if (piece instanceof Sauterelle)
+                                                jeton = (Jeton)(fenetre.getJpFourmiNoir().getComponent(0));
+                                                jeton.decremente();
+                                            } else if (piece instanceof Sauterelle) {
                                                 tmpPiece = plateau.getJoueurNoir().getSauterelle();
-                                            else if (piece instanceof Scarabee)
+                                                jeton = (Jeton)(fenetre.getJpSauterelleNoir().getComponent(0));
+                                                jeton.decremente();
+                                            } else if (piece instanceof Scarabee) {
                                                 tmpPiece = plateau.getJoueurNoir().getScarabe();
+                                                jeton = (Jeton)(fenetre.getJpScarabeeNoir().getComponent(0));
+                                                jeton.decremente();
+                                            }
                                         }
                                     }else {
                                         invalide = true;
@@ -114,6 +139,7 @@ public class ControlGrille implements MouseListener, KeyListener{
                                 if (!invalide) {
                                     plateau.jouer(tmpPiece, position);
                                     plateau.setPieceSelectionne(null);
+                                    fenetre.deselection();
                                     fenetre.affichagePlateau(false, false);
                                     adaptationPlateauVue();
                                     Joueur perdant = plateau.perdant();

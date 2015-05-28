@@ -190,43 +190,33 @@ public class Fenetre extends JFrame {
         switch(jeton){
             case AbeilleBlanc:
                 typePiece = jpAbeilleBlanc;
-                indicateurPiece.add(new JLabel("x " + plateau.getJoueurBlanc().nbAbeilleDisponible()));
                 break;
             case AbeilleNoir:
                 typePiece = jpAbeilleNoir;
-                indicateurPiece.add(new JLabel("x " + plateau.getJoueurNoir().nbAbeilleDisponible()));
                 break;
             case AraigneeBlanc:
                 typePiece = jpAraigneeBlanc;
-                indicateurPiece.add(new JLabel("x " + plateau.getJoueurBlanc().nbAraigneeDisponible()));
                 break;
             case AraigneeNoir:
                 typePiece = jpAraigneeNoir;
-                indicateurPiece.add(new JLabel("x " + plateau.getJoueurNoir().nbAraigneeDisponible()));
                 break;
             case FourmiBlanc:
                 typePiece = jpFourmiBlanc;
-                indicateurPiece.add(new JLabel("x " + plateau.getJoueurBlanc().nbFourmiDisponible()));
                 break;
             case FourmiNoir:
                 typePiece = jpFourmiNoir;
-                indicateurPiece.add(new JLabel("x " + plateau.getJoueurNoir().nbFourmiDisponible()));
                 break;
             case SauterelleBlanc:
                 typePiece = jpSauterelleBlanc;
-                indicateurPiece.add(new JLabel("x " + plateau.getJoueurBlanc().nbSauterelleDisponible()));
                 break;
             case SauterelleNoir:
                 typePiece = jpSauterelleNoir;
-                indicateurPiece.add(new JLabel("x " + plateau.getJoueurNoir().nbSauterelleDisponible()));
                 break;
             case ScarabeeBlanc:
                 typePiece = jpScarabeeBlanc;
-                indicateurPiece.add(new JLabel("x " + plateau.getJoueurBlanc().nbScarabeeDisponible()));
                 break;
             case ScarabeeNoir:
                 typePiece = jpScarabeeNoir;
-                indicateurPiece.add(new JLabel("x " + plateau.getJoueurNoir().nbScarabeeDisponible()));
                 break;
             default:
                 typePiece = jpDefaut;
@@ -234,7 +224,6 @@ public class Fenetre extends JFrame {
         }
 
         globInventaire.add(typePiece);
-        globInventaire.add(indicateurPiece);
         caseInventaire.add(globInventaire, BorderLayout.CENTER);
 
         return caseInventaire;
@@ -286,7 +275,7 @@ public class Fenetre extends JFrame {
         inventaire.add(caseInventaire(EnumJeton.ScarabeeNoir));
 
         globalInventaire.add(jPpastilleNoir);
-        globalInventaire.add(caseInventaireNom(plateau.getJoueurBlanc()));
+        globalInventaire.add(caseInventaireNom(plateau.getJoueurNoir()));
         globalInventaire.add(inventaire);
 
         return globalInventaire;
@@ -331,6 +320,29 @@ public class Fenetre extends JFrame {
         grille.addKeyListener(kl);
     }
 
+    public void deselection() {
+        Jeton jeton;
+        jeton = (Jeton)(jpAbeilleBlanc.getComponent(0));
+        jeton.deselection();
+        jeton = (Jeton)(jpAraigneeBlanc.getComponent(0));
+        jeton.deselection();
+        jeton = (Jeton)(jpSauterelleBlanc.getComponent(0));
+        jeton.deselection();
+        jeton = (Jeton)(jpScarabeeBlanc.getComponent(0));
+        jeton.deselection();
+        jeton = (Jeton)(jpFourmiBlanc.getComponent(0));
+        jeton.deselection();
+        jeton = (Jeton)(jpAbeilleNoir.getComponent(0));
+        jeton.deselection();
+        jeton = (Jeton)(jpAraigneeNoir.getComponent(0));
+        jeton.deselection();
+        jeton = (Jeton)(jpSauterelleNoir.getComponent(0));
+        jeton.deselection();
+        jeton = (Jeton)(jpScarabeeNoir.getComponent(0));
+        jeton.deselection();
+        jeton = (Jeton)(jpFourmiNoir.getComponent(0));
+        jeton.deselection();
+    }
 
     public JPanel getJpAbeilleBlanc() {
         return jpAbeilleBlanc;
@@ -387,6 +399,39 @@ public class Fenetre extends JFrame {
     }
 
     public void reinitialiser() {
+        JLabel abeilleBlanc = new AbeilleBlanc();
+        JLabel araigneeBlanc = new AraigneeBlanc();
+        JLabel fourmiBlanc = new FourmiBlanc();
+        JLabel sauterelleBlanc = new SauterelleBlanc();
+        JLabel scarabeeBlanc = new ScarabeeBlanc();
+        JLabel abeilleNoir = new AbeilleNoir();
+        JLabel araigneeNoir = new AraigneeNoir();
+        JLabel fourmiNoir = new FourmiNoir();
+        JLabel sauterelleNoir = new SauterelleNoir();
+        JLabel scarabeeNoir = new ScarabeeNoir();
+
+        jpAbeilleBlanc.removeAll();
+        jpAbeilleBlanc.add(abeilleBlanc);
+        jpAraigneeBlanc.removeAll();
+        jpAraigneeBlanc.add(araigneeBlanc);
+        jpFourmiBlanc.removeAll();
+        jpFourmiBlanc.add(fourmiBlanc);
+        jpSauterelleBlanc.removeAll();
+        jpSauterelleBlanc.add(sauterelleBlanc);
+        jpScarabeeBlanc.removeAll();
+        jpScarabeeBlanc.add(scarabeeBlanc);
+
+        jpAbeilleNoir.removeAll();
+        jpAbeilleNoir.add(abeilleNoir);
+        jpAraigneeNoir.removeAll();
+        jpAraigneeNoir.add(araigneeNoir);
+        jpFourmiNoir.removeAll();
+        jpFourmiNoir.add(fourmiNoir);
+        jpSauterelleNoir.removeAll();
+        jpSauterelleNoir.add(sauterelleNoir);
+        jpScarabeeNoir.removeAll();
+        jpScarabeeNoir.add(scarabeeNoir);
+
         grille.centre = new Point(3,3);
     }
 }

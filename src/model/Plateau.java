@@ -58,7 +58,7 @@ public class Plateau {
 					}
 				}
 			}
-			if(joueurQuiJoue==joueurBlanc) {
+			if(placementPossible.size()==0) {
 				placementPossible.add(new Point(0, 0));
 			}
 		} else {
@@ -99,17 +99,15 @@ public class Plateau {
 
 	private void deplacer(Piece piece, Point point) {
 		if ( piece_pose.size()>0 && piece.getDeplacementPossible()!=null && piece.getDeplacementPossible().contient(point)) {
-			casserDependance(piece, point);
+			casserDependance(piece);
 			piece.setPosition(point);
 			setDependance(point, piece);
 		}
 	}
 
-	private void casserDependance(Piece piece, Point point) {
+	private void casserDependance(Piece piece) {
 		for(Piece chaquePiece : piece_pose) {
-			if(chaquePiece.getVoisinNull().contient(point)) {
-				chaquePiece.retireVoisin(piece);
-			}
+			chaquePiece.retireVoisin(piece);
 		}
 		piece.nettoyerVoisin();
 	}

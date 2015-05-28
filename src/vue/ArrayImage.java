@@ -67,30 +67,63 @@ public class ArrayImage {
 
 
     private Image associationImage(Piece piece) {
+        Image image;
         if(piece.getJoueur()==plateau.getJoueurBlanc()) {
             switch (piece.typePiece) {
                 case Abeille:
-                    return new ImageIcon("image/Blanc/jeton_blanc/jeton_blanc_abeille.png").getImage();
+                    if(plateau.getPieceSelectionne() == piece)
+                        image = new ImageIcon("image/Blanc/jeton_blanc_hover/jeton_blanc_abeille_hover.png").getImage();
+                    else image = new ImageIcon("image/Blanc/jeton_blanc/jeton_blanc_abeille.png").getImage();
+                    return image;
                 case Araignee:
-                    return new ImageIcon("image/Blanc/jeton_blanc/jeton_blanc_araignee.png").getImage();
+                    if(plateau.getPieceSelectionne() == piece)
+                        image = new ImageIcon("image/Blanc/jeton_blanc_hover/jeton_blanc_araignee_hover.png").getImage();
+                    else image = new ImageIcon("image/Blanc/jeton_blanc/jeton_blanc_araignee.png").getImage();
+                    return image;
                 case Fourmi:
-                    return new ImageIcon("image/Blanc/jeton_blanc/jeton_blanc_fourmi.png").getImage();
+                    if(plateau.getPieceSelectionne() == piece)
+                        image = new ImageIcon("image/Blanc/jeton_blanc_hover/jeton_blanc_fourmi_hover.png").getImage();
+                    else image = new ImageIcon("image/Blanc/jeton_blanc/jeton_blanc_fourmi.png").getImage();
+                    return image;
                 case Sauterelle:
-                    return new ImageIcon("image/Blanc/jeton_blanc/jeton_blanc_sauterelle.png").getImage();
+                    if(plateau.getPieceSelectionne() == piece)
+                        image = new ImageIcon("image/Blanc/jeton_blanc_hover/jeton_blanc_sauterelle_hover.png").getImage();
+                    else image = new ImageIcon("image/Blanc/jeton_blanc/jeton_blanc_sauterelle.png").getImage();
+                    return image;
                 case Scarabee:
-                    return new ImageIcon("image/Blanc/jeton_blanc/jeton_blanc_scarabee.png").getImage();
+                    if(plateau.getPieceSelectionne() == piece)
+                        image = new ImageIcon("image/Blanc/jeton_blanc_hover/jeton_blanc_scarabee_hover.png").getImage();
+                    else image = new ImageIcon("image/Blanc/jeton_blanc/jeton_blanc_scarabee.png").getImage();
+                    return image;
             }
-        }else{
-            if (piece instanceof Abeille)
-                return new ImageIcon("image/Noir/jeton_noir/jeton_noir_abeille.png").getImage();
-            else if (piece instanceof Araignee)
-                return new ImageIcon("image/Noir/jeton_noir/jeton_noir_araignee.png").getImage();
-            else if (piece instanceof Fourmi)
-                return new ImageIcon("image/Noir/jeton_noir/jeton_noir_fourmi.png").getImage();
-            else if (piece instanceof Sauterelle)
-                return new ImageIcon("image/Noir/jeton_noir/jeton_noir_sauterelle.png").getImage();
-            else if (piece instanceof Scarabee)
-                return new ImageIcon("image/Noir/jeton_noir/jeton_noir_scarabee.png").getImage();
+        }else {
+            switch (piece.typePiece) {
+                case Abeille:
+                    if(plateau.getPieceSelectionne() == piece)
+                        image = new ImageIcon("image/Noir/jeton_noir_hover/jeton_noir_abeille_hover.png").getImage();
+                    else image = new ImageIcon("image/Noir/jeton_noir/jeton_noir_abeille.png").getImage();
+                    return image;
+                case Araignee:
+                    if(plateau.getPieceSelectionne() == piece)
+                        image = new ImageIcon("image/Noir/jeton_noir_hover/jeton_noir_araignee_hover.png").getImage();
+                    else image = new ImageIcon("image/Noir/jeton_noir/jeton_noir_araignee.png").getImage();
+                    return image;
+                case Fourmi:
+                    if(plateau.getPieceSelectionne() == piece)
+                        image = new ImageIcon("image/Noir/jeton_noir_hover/jeton_noir_fourmi_hover.png").getImage();
+                    else image = new ImageIcon("image/Noir/jeton_noir/jeton_noir_fourmi.png").getImage();
+                    return image;
+                case Sauterelle:
+                    if(plateau.getPieceSelectionne() == piece)
+                        image = new ImageIcon("image/Noir/jeton_noir_hover/jeton_noir_sauterelle_hover.png").getImage();
+                    else image = new ImageIcon("image/Noir/jeton_noir/jeton_noir_sauterelle.png").getImage();
+                    return image;
+                case Scarabee:
+                    if(plateau.getPieceSelectionne() == piece)
+                        image = new ImageIcon("image/Noir/jeton_noir_hover/jeton_noir_scarabee_hover.png").getImage();
+                    else image = new ImageIcon("image/Noir/jeton_noir/jeton_noir_scarabee.png").getImage();
+                    return image;
+            }
         }
         return null;
     }
