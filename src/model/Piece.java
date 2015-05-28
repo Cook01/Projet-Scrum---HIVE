@@ -8,12 +8,21 @@ import java.util.ArrayList;
 public abstract class Piece {
     public final TypePieceEnum typePiece;
     protected Point position;
-    protected Piece dessus, dessus_droite, dessous_droite, dessous, dessous_gauche, dessus_gauche;
+    protected Piece dessus, dessus_droite, dessous_droite, dessous, dessous_gauche, dessus_gauche, sky;
     protected Joueur joueur;
 
 
+    public Piece getSky() {
+        return sky;
+    }
+
+    public void setSky(Piece sky) {
+        this.sky = sky;
+    }
+
     public Piece(Joueur joueur, TypePieceEnum typePiece){
-        dessus = dessus_droite = dessous_droite = dessous = dessous_gauche = dessus_gauche = null;
+
+        dessus = dessus_droite = dessous_droite = dessous = dessous_gauche = dessus_gauche = sky = null;
         this.joueur = joueur;
         this.typePiece = typePiece;
     }
@@ -101,7 +110,7 @@ public abstract class Piece {
         dessus = dessus_droite = dessous_droite = dessous = dessous_gauche = dessus_gauche = null;
     }
 
-    protected boolean peutSeDeplacer(){
+    public boolean peutSeDeplacer(){
         ArrayListPoint pointLibre = getVoisinNull();
         if(pointLibre.size()==0) return false;
         if(pointLibre.size()==1) return false;
