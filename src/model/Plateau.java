@@ -115,7 +115,7 @@ public class Plateau {
 		}
 	}
 
-	private void casserDependance(Piece piece) {
+	public void casserDependance(Piece piece) {
 		for(Piece chaquePiece : piece_pose) {
 			chaquePiece.retireVoisin(piece);
 		}

@@ -40,6 +40,7 @@ public class Fenetre extends JFrame {
         affichageEcranAccueil();
     }
 
+
     private void initialiseEcranMenu() {
         boutonJouer = new JButton("Démarrer");
         bouton1 = new JButton("Bouton 1");
@@ -275,7 +276,7 @@ public class Fenetre extends JFrame {
         inventaire.add(caseInventaire(EnumJeton.ScarabeeNoir));
 
         globalInventaire.add(jPpastilleNoir);
-        globalInventaire.add(caseInventaireNom(plateau.getJoueurBlanc()));
+        globalInventaire.add(caseInventaireNom(plateau.getJoueurNoir()));
         globalInventaire.add(inventaire);
 
         return globalInventaire;
