@@ -5,6 +5,8 @@ import model.Joueur;
 import model.Piece;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Collection;
 
 public class Sauterelle extends Piece{
     public Sauterelle(Joueur joueur) {
@@ -13,65 +15,59 @@ public class Sauterelle extends Piece{
 
     public ArrayListPoint getDeplacementPossible() {
         ArrayListPoint deplacementPossible = new ArrayListPoint();
-        ArrayListPoint tmpDeplacement = new ArrayListPoint();
-        ArrayListPoint voisinLibre = getVoisinNull(); //renvoi cases libres autour de pièce
+
         if(peutSeDeplacer()) {
             Piece temp;
-            if(dessus != null){
-                temp = dessus;
-                while(temp != null){
-                    temp = dessus.getDessus();
+
+            temp = dessus;
+            if(temp != null){
+                while(temp.getDessus() != null){
+                    temp = temp.getDessus();
                 }
-                //deplacementPossible.add();
+                deplacementPossible.add(temp.getVoisin("dessus"));
             }
 
-            if(dessus_droite != null){
-                temp = dessus_droite;
-                while(temp != null){
-                    temp = dessus_droite.getDessus_droite();
+            temp = dessus_droite;
+            if(temp != null){
+                while(temp.getDessus_droite() != null){
+                    temp = temp.getDessus_droite();
                 }
-                //deplacementPossible.add();
+                deplacementPossible.add(temp.getVoisin("dessus"));
             }
 
-            if(dessus_gauche != null){
-                temp = dessus_gauche;
-                while(temp != null){
-                    temp = dessus_gauche.getDessus_gauche();
+            temp = dessous_droite;
+            if(temp != null){
+                while(temp.getDessous_droite() != null){
+                    temp = temp.getDessous_droite();
                 }
-                //deplacementPossible.add();
+                deplacementPossible.add(temp.getVoisin("dessus"));
             }
 
-            if(dessous != null){
-                temp = dessous;
-                while(dessous != null){
-                    temp = dessous.getDessous();
+            temp = dessous;
+            if(temp != null){
+                while(temp.getDessous() != null){
+                    temp = temp.getDessous();
                 }
-                //deplacementPossible.add();
+                deplacementPossible.add(temp.getVoisin("dessus"));
             }
 
-            if(dessous_gauche != null){
-                temp = dessous_gauche;
-                while(dessous_gauche != null){
-                    temp = dessous_gauche.getDessous_gauche();
+            temp = dessous_gauche;
+            if(temp != null){
+                while(temp.getDessous_gauche() != null){
+                    temp = temp.getDessous_gauche();
                 }
-                //deplacementPossible.add();
+                deplacementPossible.add(temp.getVoisin("dessus"));
             }
 
-            if(dessous_droite != null){
-                temp = dessous_droite;
-                while(dessous_droite != null){
-                    temp = dessous_droite.getDessous_droite();
+            temp = dessus_gauche;
+            if(temp != null){
+                while(temp.getDessus_gauche() != null){
+                    temp = temp.getDessus_gauche();
                 }
-                //deplacementPossible.add();
-            }
-
-           
-        }
-        for(Point point : voisinLibre) {
-            if(tmpDeplacement.contient(point)) {
-                deplacementPossible.add(point);
+                deplacementPossible.add(temp.getVoisin("dessus"));
             }
         }
+
         return deplacementPossible;
     }
 }

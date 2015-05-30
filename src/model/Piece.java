@@ -74,6 +74,45 @@ public abstract class Piece {
         return voisinNull;
     }
 
+    public Point getVoisin(String string) {
+        if(string.equals("dessus")) {
+            return new Point(position.x, position.y + 1);
+        }
+        if(string.equals("dessus_droite")) {
+            if(position.x%2==0) {
+                return new Point(position.x + 1, position.y + 1);
+            } else {
+                return new Point(position.x + 1, position.y);
+            }
+        }
+        if(string.equals("dessous_droite")) {
+            if(position.x%2==0) {
+                return new Point(position.x + 1, position.y);
+            } else {
+                return new Point(position.x + 1, position.y - 1);
+            }
+        }
+        if(string.equals("dessous")) {
+            return new Point(position.x, position.y - 1);
+        }
+        if(string.equals("dessous_gauche")) {
+            if(position.x%2==0) {
+                return new Point(position.x - 1, position.y);
+            } else {
+                return new Point(position.x - 1, position.y - 1);
+            }
+        }
+        if(string.equals("dessus_gauche")) {
+            if(position.x%2==0) {
+                return new Point(position.x - 1, position.y + 1);
+            } else {
+                return new Point(position.x - 1, position.y);
+            }
+        }
+
+        return null;
+    }
+
     public void setVoisin(Point point, Piece piece) {
         if(point.x == position.x ) {
             if(point.y == position.y + 1) {
