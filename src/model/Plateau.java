@@ -41,7 +41,7 @@ public class Plateau {
 		ArrayListPoint pointTester = new ArrayListPoint();
 		pointTester.setListe(piece.getVoisinNull());
 		for(Piece chaquePiece : piece_pose) {
-			if(pointTester.contient(chaquePiece.getPosition())) {
+			if(pointTester.contient(chaquePiece.getPosition()) && getPieceBase(chaquePiece.getPosition()) == chaquePiece) {
 				chaquePiece.setVoisin(point, piece);
 				piece.setVoisin(chaquePiece.getPosition(), chaquePiece);
 			}
@@ -155,6 +155,20 @@ public class Plateau {
 				a = chaquePiece;
 				while (a.getSky() != null)
 					a = a.getSky();
+				return a;
+			}
+		}
+		return null;
+	}
+
+	public Piece getPieceBase(Point point) {
+		Piece a;
+		for(Piece chaquePiece : piece_pose) {
+			if (point.equals(chaquePiece.getPosition())) {
+				a = chaquePiece;
+				while(a instanceof Scarabee && ((Scarabee) a).getGround() != null)
+					a = ((Scarabee) a).getGround();
+
 				return a;
 			}
 		}

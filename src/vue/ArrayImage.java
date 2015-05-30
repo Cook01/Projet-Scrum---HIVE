@@ -3,7 +3,6 @@ package vue;
 import model.ArrayListPoint;
 import model.Piece;
 import model.Plateau;
-import model.typePiece.*;
 
 import javax.swing.*;
 import java.awt.*;

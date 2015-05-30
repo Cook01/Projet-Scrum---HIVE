@@ -19,7 +19,7 @@ public class ControlBoutonMenu implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        fenetre.affichageEcranMenu();
+        fenetre.affichagePlateau(false, false);
         fenetre.revalidate();
     }
 }

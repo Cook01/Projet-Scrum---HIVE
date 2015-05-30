@@ -4,10 +4,6 @@ import model.ArrayListPoint;
 import model.Joueur;
 import model.Piece;
 
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.Collection;
-
 public class Sauterelle extends Piece{
     public Sauterelle(Joueur joueur) {
         super(joueur, TypePieceEnum.Sauterelle);
@@ -32,7 +28,7 @@ public class Sauterelle extends Piece{
                 while(temp.getDessus_droite() != null){
                     temp = temp.getDessus_droite();
                 }
-                deplacementPossible.add(temp.getVoisin("dessus"));
+                deplacementPossible.add(temp.getVoisin("dessus_droite"));
             }
 
             temp = dessous_droite;
@@ -40,7 +36,7 @@ public class Sauterelle extends Piece{
                 while(temp.getDessous_droite() != null){
                     temp = temp.getDessous_droite();
                 }
-                deplacementPossible.add(temp.getVoisin("dessus"));
+                deplacementPossible.add(temp.getVoisin("dessous_droite"));
             }
 
             temp = dessous;
@@ -48,7 +44,7 @@ public class Sauterelle extends Piece{
                 while(temp.getDessous() != null){
                     temp = temp.getDessous();
                 }
-                deplacementPossible.add(temp.getVoisin("dessus"));
+                deplacementPossible.add(temp.getVoisin("dessous"));
             }
 
             temp = dessous_gauche;
@@ -56,7 +52,7 @@ public class Sauterelle extends Piece{
                 while(temp.getDessous_gauche() != null){
                     temp = temp.getDessous_gauche();
                 }
-                deplacementPossible.add(temp.getVoisin("dessus"));
+                deplacementPossible.add(temp.getVoisin("dessous_gauche"));
             }
 
             temp = dessus_gauche;
@@ -64,7 +60,7 @@ public class Sauterelle extends Piece{
                 while(temp.getDessus_gauche() != null){
                     temp = temp.getDessus_gauche();
                 }
-                deplacementPossible.add(temp.getVoisin("dessus"));
+                deplacementPossible.add(temp.getVoisin("dessus_gauche"));
             }
         }
 

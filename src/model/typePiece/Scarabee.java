@@ -16,11 +16,6 @@ public class Scarabee extends Piece{
     }
     public void setPosition(Point point, Plateau p) {
         Piece a;
-        Joueur j = p.getJoueurQuiJoue();
-        if(j == p.getJoueurBlanc())
-            j = p.getJoueurNoir();
-        else
-            j = p.getJoueurBlanc();
         a = p.getPiece(point);
         if(a != null) {
             this.ground = a;
