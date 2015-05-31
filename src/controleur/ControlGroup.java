@@ -11,6 +11,7 @@ public class ControlGroup {
         new ControlBoutonGroup(plateau, fenetre);
         new ControlInventaire(plateau, fenetre);
         new ControlGrille(plateau, fenetre);
+        new ControlMenu(fenetre, plateau);
 
         fenetre.setVisible(true);
     }

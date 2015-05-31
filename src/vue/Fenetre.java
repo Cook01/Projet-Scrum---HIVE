@@ -21,6 +21,7 @@ public class Fenetre extends JFrame {
     private JPanel jpAbeilleBlanc, jpAraigneeBlanc, jpFourmiBlanc, jpSauterelleBlanc, jpScarabeeBlanc;
     private JPanel jpAbeilleNoir, jpAraigneeNoir, jpFourmiNoir, jpSauterelleNoir, jpScarabeeNoir;
     private JPanel jpDefaut;
+    public JMenuItem jMenuItem;
     private Grille grille;
 
 
@@ -30,6 +31,7 @@ public class Fenetre extends JFrame {
         initialiseEcranAccueil();
         initialiseEcranMenu();
         initialisePlateau();
+        initMenu();
 
         setSize(TAILLE_FENETRE_X, TAILLE_FENETRE_Y);
         setLocationRelativeTo(null);
@@ -118,6 +120,18 @@ public class Fenetre extends JFrame {
         bouton3.addActionListener(al);
     }
 
+    public void initMenu() {
+        JMenuBar menuBar = new JMenuBar();
+        JMenu menu = new JMenu("Options");
+        jMenuItem = new JMenuItem("Nouvelle Partie");
+        menu.add(jMenuItem);
+        menuBar.add(menu);
+        setJMenuBar(menuBar);
+    }
+
+    public void setControlMenu(ActionListener cMenu) {
+        jMenuItem.addActionListener(cMenu);
+    }
 
     public void initialisePlateau(){
         JLabel abeilleBlanc = new AbeilleBlanc();
