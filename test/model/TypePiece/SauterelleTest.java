@@ -16,7 +16,7 @@ public class SauterelleTest {
     }
 
     @Test
-    public void DeplacementPossibleUnVoisinTest(){
+    public void DeplacementPossibleUnVoisinHautTest(){
         Sauterelle sauterelle = new Sauterelle(new Joueur("blanc"));
         Sauterelle sauterelle1 = new Sauterelle(new Joueur("blanc"));
         sauterelle.setPosition(new Point(5, 5));
@@ -25,6 +25,62 @@ public class SauterelleTest {
         sauterelle.setVoisin(new Point(5, 6), sauterelle1);
         Assert.assertTrue(sauterelle.getDeplacementPossible().size() == 1);
         Assert.assertTrue(sauterelle.getDeplacementPossible().contient(new Point(5, 7)));
+    }
+
+    @Test
+    public void DeplacementPossibleUnVoisinHautGaucheTest(){
+        Sauterelle sauterelle = new Sauterelle(new Joueur("blanc"));
+        Sauterelle sauterelle1 = new Sauterelle(new Joueur("blanc"));
+        sauterelle.setPosition(new Point(5, 5));
+        sauterelle1.setPosition(new Point(4, 6));
+        sauterelle1.setVoisin(new Point(5, 5), sauterelle);
+        sauterelle.setVoisin(new Point(4, 6), sauterelle1);
+        Assert.assertTrue(sauterelle.getDeplacementPossible().size() == 1);
+        Assert.assertTrue(sauterelle.getDeplacementPossible().contient(new Point(3, 6)));
+    }
+    @Test
+    public void DeplacementPossibleUnVoisinHautDroiteTest(){
+        Sauterelle sauterelle = new Sauterelle(new Joueur("blanc"));
+        Sauterelle sauterelle1 = new Sauterelle(new Joueur("blanc"));
+        sauterelle.setPosition(new Point(5, 5));
+        sauterelle1.setPosition(new Point(6, 6));
+        sauterelle1.setVoisin(new Point(5, 5), sauterelle);
+        sauterelle.setVoisin(new Point(6, 6), sauterelle1);
+        Assert.assertTrue(sauterelle.getDeplacementPossible().size() == 1);
+        Assert.assertTrue(sauterelle.getDeplacementPossible().contient(new Point(7, 6)));
+    }
+    @Test
+    public void DeplacementPossibleUnVoisinBasGaucheTest(){
+        Sauterelle sauterelle = new Sauterelle(new Joueur("blanc"));
+        Sauterelle sauterelle1 = new Sauterelle(new Joueur("blanc"));
+        sauterelle.setPosition(new Point(5, 5));
+        sauterelle1.setPosition(new Point(4, 5));
+        sauterelle1.setVoisin(new Point(5, 5), sauterelle);
+        sauterelle.setVoisin(new Point(4, 5), sauterelle1);
+        Assert.assertTrue(sauterelle.getDeplacementPossible().size() == 1);
+        Assert.assertTrue(sauterelle.getDeplacementPossible().contient(new Point(3, 6)));
+    }
+    @Test
+    public void DeplacementPossibleUnVoisinBasDroiteTest(){
+        Sauterelle sauterelle = new Sauterelle(new Joueur("blanc"));
+        Sauterelle sauterelle1 = new Sauterelle(new Joueur("blanc"));
+        sauterelle.setPosition(new Point(5, 5));
+        sauterelle1.setPosition(new Point(6, 5));
+        sauterelle1.setVoisin(new Point(5, 5), sauterelle);
+        sauterelle.setVoisin(new Point(6, 5), sauterelle1);
+        Assert.assertTrue(sauterelle.getDeplacementPossible().size() == 1);
+        Assert.assertTrue(sauterelle.getDeplacementPossible().contient(new Point(7, 6)));
+    }
+    @Test
+    public void DeplacementPossibleUnVoisinBasTest(){
+        Sauterelle sauterelle = new Sauterelle(new Joueur("blanc"));
+        Sauterelle sauterelle1 = new Sauterelle(new Joueur("blanc"));
+        sauterelle.setPosition(new Point(5, 5));
+        sauterelle1.setPosition(new Point(5, 4));
+        sauterelle1.setVoisin(new Point(5, 5), sauterelle);
+        sauterelle.setVoisin(new Point(5, 4), sauterelle1);
+        Assert.assertTrue(sauterelle.getDeplacementPossible().size() == 1);
+        Assert.assertTrue(sauterelle.getDeplacementPossible().contient(new Point(5, 3)));
     }
 
     @Test
