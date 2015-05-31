@@ -49,7 +49,7 @@ public class Fenetre extends JFrame {
 
 
     private void initialiseEcranAccueil() {
-        boutonMenu = new JButton("Menu");
+        boutonMenu = new JButton("Jouer !");
     }
 
 
