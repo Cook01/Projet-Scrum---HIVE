@@ -7,7 +7,7 @@ import java.awt.*;
 
 public class PlateauJeu extends JPanel{
     private Image Background;
-    private ImageIcon backIcon;
+    public final ImageIcon backIcon;
     public Point position;
     private Fenetre fenetre;
     public int pas_x, pas_y, row, col, bordure_x, bordure_y;

@@ -94,7 +94,8 @@ public class Plateau {
 	}
 
 	public void jouer(Piece piece, Point point) {
-		if(piece.getPosition() == null) placer(piece, point);
+		if(piece.getPosition() == null)
+			placer(piece, point);
 		else deplacer(piece, point);
 
 		if(joueurQuiJoue==joueurBlanc) joueurQuiJoue = joueurNoir;
