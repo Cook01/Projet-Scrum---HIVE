@@ -104,7 +104,7 @@ public class Plateau {
 		}
 	}
 
-	private void deplacer(Piece piece, Point point) {
+	public void deplacer(Piece piece, Point point) {
 		if ( piece_pose.size()>0 && piece.getDeplacementPossible()!=null && piece.getDeplacementPossible().contient(point)) {
 			casserDependance(piece);
 			if(piece instanceof Scarabee)
@@ -135,7 +135,7 @@ public class Plateau {
 	}
 
 	public Piece getPiece(Point point, Joueur j) {
-		Piece a  = null;
+		Piece a;
 		for(Piece chaquePiece : piece_pose) {
 			if (point.equals(chaquePiece.getPosition()) && chaquePiece.getJoueur().equals(j)) {
 				a = chaquePiece;

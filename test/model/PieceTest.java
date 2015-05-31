@@ -123,5 +123,63 @@ public class PieceTest {
         piece.setVoisin(new Point(6, 5), piece4);
         Assert.assertTrue(piece.peutSeDeplacer());
     }
+
+    @Test
+    public void obtenir_piece_voisine_Test() {
+        Plateau plateau = new Plateau();
+        Joueur joueur = new Joueur("Blanc");
+        Piece abeille = new Abeille(joueur);
+        plateau.placer(abeille, new Point(0,0));
+        plateau.placer(new Abeille(joueur), new Point(0,1));
+        plateau.placer(new Abeille(joueur), new Point(0,-1));
+        plateau.placer(new Abeille(joueur), new Point(-1,1));
+        plateau.placer(new Abeille(joueur), new Point(-1,0));
+        plateau.placer(new Abeille(joueur), new Point(1,1));
+        plateau.placer(new Abeille(joueur), new Point(1,0));
+        Assert.assertTrue(abeille.getVoisin("dessus").equals(abeille.getDessus().getPosition()));
+        Assert.assertTrue(abeille.getVoisin("dessus_droite").equals(abeille.getDessus_droite().getPosition()));
+        Assert.assertTrue(abeille.getVoisin("dessous_droite").equals(abeille.getDessous_droite().getPosition()));
+        Assert.assertTrue(abeille.getVoisin("dessous").equals(abeille.getDessous().getPosition()));
+        Assert.assertTrue(abeille.getVoisin("dessous_gauche").equals(abeille.getDessous_gauche().getPosition()));
+        Assert.assertTrue(abeille.getVoisin("dessus_gauche").equals(abeille.getDessus_gauche().getPosition()));
+    }
+
+    @Test
+    public void obtenir_piece_voisine_ligne_impair_Test() {
+        Plateau plateau = new Plateau();
+        Joueur joueur = new Joueur("Blanc");
+        Piece abeille = new Abeille(joueur);
+        plateau.placer(new Abeille(joueur), new Point(0,0));
+        plateau.placer(abeille, new Point(1,1));
+        plateau.placer(new Abeille(joueur), new Point(1,0));
+        plateau.placer(new Abeille(joueur), new Point(1,2));
+        plateau.placer(new Abeille(joueur), new Point(0,1));
+        plateau.placer(new Abeille(joueur), new Point(2,1));
+        plateau.placer(new Abeille(joueur), new Point(2,0));
+        Assert.assertTrue(abeille.getVoisin("dessus").equals(abeille.getDessus().getPosition()));
+        Assert.assertTrue(abeille.getVoisin("dessus_droite").equals(abeille.getDessus_droite().getPosition()));
+        Assert.assertTrue(abeille.getVoisin("dessous_droite").equals(abeille.getDessous_droite().getPosition()));
+        Assert.assertTrue(abeille.getVoisin("dessous").equals(abeille.getDessous().getPosition()));
+        Assert.assertTrue(abeille.getVoisin("dessous_gauche").equals(abeille.getDessous_gauche().getPosition()));
+        Assert.assertTrue(abeille.getVoisin("dessus_gauche").equals(abeille.getDessus_gauche().getPosition()));
+    }
+
+    @Test
+    public void obtenir_voisin_inexistant() {
+        Plateau plateau = new Plateau();
+        Joueur joueur = new Joueur("Blanc");
+        Piece abeille = new Abeille(joueur);
+        plateau.placer(abeille, new Point(0,0));
+        Assert.assertNull(abeille.getVoisin("inexistant"));
+    }
+
+    @Test
+    public void obtenir_voisin_null() {
+        Plateau plateau = new Plateau();
+        Joueur joueur = new Joueur("Blanc");
+        Piece abeille = new Abeille(joueur);
+        plateau.placer(abeille, new Point(0,0));
+        Assert.assertNull(abeille.getVoisin(null));
+    }
 }
 
