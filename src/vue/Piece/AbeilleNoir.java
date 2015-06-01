@@ -6,8 +6,9 @@ import java.awt.*;
 public class AbeilleNoir extends Jeton{
     public AbeilleNoir(){
         super();
-        logo = new ImageIcon("image/Noir/jeton_noir_inventaire/jeton_noir_abeille_x1.png").getImage();
-        logoHover = new ImageIcon("image/Noir/jeton_noir_inventaire_hover/jeton_noir_abeille_hover_x1.png").getImage();
+        ClassLoader cl = this.getClass().getClassLoader();
+        logo = new ImageIcon(cl.getResource("image/Noir/jeton_noir_inventaire/jeton_noir_abeille_x1.png")).getImage();
+        logoHover = new ImageIcon(cl.getResource("image/Noir/jeton_noir_inventaire_hover/jeton_noir_abeille_hover_x1.png")).getImage();
         logoCourant = logo;
     }
 

@@ -17,11 +17,11 @@ public class Fenetre extends JFrame {
     public final static int TAILLE_FENETRE_X = 800;
     public final static int TAILLE_FENETRE_Y = 600;
     private Plateau plateau;
-    private JButton boutonMenu, boutonJouer, bouton1, bouton2, bouton3;
+    private JButton boutonMenu, boutonJouer, bouton1, bouton2, bouton3, boutonCredit;
     private JPanel jpAbeilleBlanc, jpAraigneeBlanc, jpFourmiBlanc, jpSauterelleBlanc, jpScarabeeBlanc;
     private JPanel jpAbeilleNoir, jpAraigneeNoir, jpFourmiNoir, jpSauterelleNoir, jpScarabeeNoir;
     private JPanel jpDefaut;
-    public JMenuItem jMenuItem;
+    public JMenuItem jMenuItem, jMenuCredit;
     private Grille grille;
 
 
@@ -34,6 +34,7 @@ public class Fenetre extends JFrame {
         initMenu();
 
         setSize(TAILLE_FENETRE_X, TAILLE_FENETRE_Y);
+        setTitle("Honey moon");
         setLocationRelativeTo(null);
         setResizable(false);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -47,6 +48,7 @@ public class Fenetre extends JFrame {
         bouton1 = new JButton("Bouton 1");
         bouton2 = new JButton("Bouton 2");
         bouton3 = new JButton("Bouton 3");
+        boutonCredit = new JButton("Credit");
     }
 
 
@@ -58,13 +60,17 @@ public class Fenetre extends JFrame {
     private void affichageEcranAccueil() {
         JPanel panelAccueil = new EcranAccueil();
         JPanel conteneurBoutonJouer = new JPanel();
+        JPanel conteneurBoutonCredit = new JPanel();
 
         panelAccueil.setLayout(new BoxLayout(panelAccueil, BoxLayout.Y_AXIS));
         conteneurBoutonJouer.setOpaque(false);
-
-        panelAccueil.add(Box.createVerticalStrut((int)(TAILLE_FENETRE_Y*0.8)));
+        conteneurBoutonCredit.setOpaque(false);
         conteneurBoutonJouer.add(boutonMenu);
+        conteneurBoutonCredit.add(boutonCredit);
+
+        panelAccueil.add(Box.createVerticalStrut((int)(TAILLE_FENETRE_Y*0.68)));
         panelAccueil.add(conteneurBoutonJouer);
+        panelAccueil.add(conteneurBoutonCredit);
 
         setContentPane(panelAccueil);
     }
@@ -120,17 +126,24 @@ public class Fenetre extends JFrame {
         bouton3.addActionListener(al);
     }
 
+    public void setControlBoutonCredit(ActionListener al) {
+        boutonCredit.addActionListener(al);
+    }
+
     public void initMenu() {
         JMenuBar menuBar = new JMenuBar();
         JMenu menu = new JMenu("Options");
         jMenuItem = new JMenuItem("Nouvelle Partie");
+        jMenuCredit = new JMenuItem("Credit");
         menu.add(jMenuItem);
+        menu.add(jMenuCredit);
         menuBar.add(menu);
         setJMenuBar(menuBar);
     }
 
     public void setControlMenu(ActionListener cMenu) {
         jMenuItem.addActionListener(cMenu);
+        jMenuCredit.addActionListener(cMenu);
     }
 
     public void initialisePlateau(){

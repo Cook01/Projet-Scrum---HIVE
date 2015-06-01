@@ -8,12 +8,13 @@ public class FourmiNoir extends Jeton{
 
     public FourmiNoir(){
         super();
-        logo = new ImageIcon("image/Noir/jeton_noir_inventaire/jeton_noir_fourmi_x3.png").getImage();
-        logoHover = new ImageIcon("image/Noir/jeton_noir_inventaire_hover/jeton_noir_fourmi_hover_x3.png").getImage();
-        logo1 = new ImageIcon("image/Noir/jeton_noir_inventaire/jeton_noir_fourmi_x2.png").getImage();
-        logoHover1 = new ImageIcon("image/Noir/jeton_noir_inventaire_hover/jeton_noir_fourmi_hover_x2.png").getImage();
-        logo2 = new ImageIcon("image/Noir/jeton_noir_inventaire/jeton_noir_fourmi_x1.png").getImage();
-        logoHover2 = new ImageIcon("image/Noir/jeton_noir_inventaire_hover/jeton_noir_fourmi_hover_x1.png").getImage();
+        ClassLoader cl = this.getClass().getClassLoader();
+        logo = new ImageIcon(cl.getResource("image/Noir/jeton_noir_inventaire/jeton_noir_fourmi_x3.png")).getImage();
+        logoHover = new ImageIcon(cl.getResource("image/Noir/jeton_noir_inventaire_hover/jeton_noir_fourmi_hover_x3.png")).getImage();
+        logo1 = new ImageIcon(cl.getResource("image/Noir/jeton_noir_inventaire/jeton_noir_fourmi_x2.png")).getImage();
+        logoHover1 = new ImageIcon(cl.getResource("image/Noir/jeton_noir_inventaire_hover/jeton_noir_fourmi_hover_x2.png")).getImage();
+        logo2 = new ImageIcon(cl.getResource("image/Noir/jeton_noir_inventaire/jeton_noir_fourmi_x1.png")).getImage();
+        logoHover2 = new ImageIcon(cl.getResource("image/Noir/jeton_noir_inventaire_hover/jeton_noir_fourmi_hover_x1.png")).getImage();
         logoCourant = logo;
     }
 

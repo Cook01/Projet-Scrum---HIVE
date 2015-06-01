@@ -14,8 +14,9 @@ public class PlateauJeu extends JPanel{
 
     public PlateauJeu( Fenetre fenetre) {
         super();
+        ClassLoader cl = this.getClass().getClassLoader();
         this.fenetre = fenetre;
-        backIcon = new ImageIcon("image/plateau_v4.jpg");
+        backIcon = new ImageIcon(cl.getResource("image/plateau_v4.jpg"));
         Background = backIcon.getImage();
         position = new Point(0,0);
     }

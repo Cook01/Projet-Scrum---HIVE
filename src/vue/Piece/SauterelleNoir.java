@@ -8,12 +8,13 @@ public class SauterelleNoir extends Jeton{
 
     public SauterelleNoir(){
         super();
-        logo = new ImageIcon("image/Noir/jeton_noir_inventaire/jeton_noir_sauterelle_x3.png").getImage();
-        logoHover = new ImageIcon("image/Noir/jeton_noir_inventaire_hover/jeton_noir_sauterelle_hover_x3.png").getImage();
-        logo1 = new ImageIcon("image/Noir/jeton_noir_inventaire/jeton_noir_sauterelle_x2.png").getImage();
-        logoHover1 = new ImageIcon("image/Noir/jeton_noir_inventaire_hover/jeton_noir_sauterelle_hover_x2.png").getImage();
-        logo2 = new ImageIcon("image/Noir/jeton_noir_inventaire/jeton_noir_sauterelle_x1.png").getImage();
-        logoHover2 = new ImageIcon("image/Noir/jeton_noir_inventaire_hover/jeton_noir_sauterelle_hover_x1.png").getImage();
+        ClassLoader cl = this.getClass().getClassLoader();
+        logo = new ImageIcon(cl.getResource("image/Noir/jeton_noir_inventaire/jeton_noir_sauterelle_x3.png")).getImage();
+        logoHover = new ImageIcon(cl.getResource("image/Noir/jeton_noir_inventaire_hover/jeton_noir_sauterelle_hover_x3.png")).getImage();
+        logo1 = new ImageIcon(cl.getResource("image/Noir/jeton_noir_inventaire/jeton_noir_sauterelle_x2.png")).getImage();
+        logoHover1 = new ImageIcon(cl.getResource("image/Noir/jeton_noir_inventaire_hover/jeton_noir_sauterelle_hover_x2.png")).getImage();
+        logo2 = new ImageIcon(cl.getResource("image/Noir/jeton_noir_inventaire/jeton_noir_sauterelle_x1.png")).getImage();
+        logoHover2 = new ImageIcon(cl.getResource("image/Noir/jeton_noir_inventaire_hover/jeton_noir_sauterelle_hover_x1.png")).getImage();
         logoCourant = logo;
     }
 

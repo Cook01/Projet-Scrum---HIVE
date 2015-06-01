@@ -8,10 +8,11 @@ public class AraigneeBlanc extends Jeton{
 
     public AraigneeBlanc(){
         super();
-        logo = new ImageIcon("image/Blanc/jeton_blanc_inventaire/jeton_blanc_araignee_x2.png").getImage();
-        logoHover = new ImageIcon("image/Blanc/jeton_blanc_inventaire_hover/jeton_blanc_araignee_hover_x2.png").getImage();
-        logo1 = new ImageIcon("image/Blanc/jeton_blanc_inventaire/jeton_blanc_araignee_x1.png").getImage();
-        logoHover1 = new ImageIcon("image/Blanc/jeton_blanc_inventaire_hover/jeton_blanc_araignee_hover_x1.png").getImage();
+        ClassLoader cl = this.getClass().getClassLoader();
+        logo = new ImageIcon(cl.getResource("image/Blanc/jeton_blanc_inventaire/jeton_blanc_araignee_x2.png")).getImage();
+        logoHover = new ImageIcon(cl.getResource("image/Blanc/jeton_blanc_inventaire_hover/jeton_blanc_araignee_hover_x2.png")).getImage();
+        logo1 = new ImageIcon(cl.getResource("image/Blanc/jeton_blanc_inventaire/jeton_blanc_araignee_x1.png")).getImage();
+        logoHover1 = new ImageIcon(cl.getResource("image/Blanc/jeton_blanc_inventaire_hover/jeton_blanc_araignee_hover_x1.png")).getImage();
         logoCourant = logo;
     }
 

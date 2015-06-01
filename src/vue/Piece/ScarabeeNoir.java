@@ -8,10 +8,11 @@ public class ScarabeeNoir extends Jeton{
 
     public ScarabeeNoir(){
         super();
-        logo = new ImageIcon("image/Noir/jeton_noir_inventaire/jeton_noir_scarabee_x2.png").getImage();
-        logoHover = new ImageIcon("image/Noir/jeton_noir_inventaire_hover/jeton_noir_scarabee_hover_x2.png").getImage();
-        logo1 = new ImageIcon("image/Noir/jeton_noir_inventaire/jeton_noir_scarabee_x1.png").getImage();
-        logoHover1 = new ImageIcon("image/Noir/jeton_noir_inventaire_hover/jeton_noir_scarabee_hover_x1.png").getImage();
+        ClassLoader cl = this.getClass().getClassLoader();
+        logo = new ImageIcon(cl.getResource("image/Noir/jeton_noir_inventaire/jeton_noir_scarabee_x2.png")).getImage();
+        logoHover = new ImageIcon(cl.getResource("image/Noir/jeton_noir_inventaire_hover/jeton_noir_scarabee_hover_x2.png")).getImage();
+        logo1 = new ImageIcon(cl.getResource("image/Noir/jeton_noir_inventaire/jeton_noir_scarabee_x1.png")).getImage();
+        logoHover1 = new ImageIcon(cl.getResource("image/Noir/jeton_noir_inventaire_hover/jeton_noir_scarabee_hover_x1.png")).getImage();
         logoCourant = logo;
     }
 

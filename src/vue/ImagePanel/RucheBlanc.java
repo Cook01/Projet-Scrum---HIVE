@@ -11,9 +11,10 @@ public class RucheBlanc extends JPanel {
 
     public RucheBlanc(Plateau plateau) {
         super();
+        ClassLoader cl = this.getClass().getClassLoader();
         this.plateau = plateau;
-        Background = new ImageIcon("image/inventaire/ruche_inventaire_blanc.jpg").getImage();
-        Background_hover = new ImageIcon("image/inventaire/ruche_inventaire_blanc_hover.jpg").getImage();
+        Background = new ImageIcon(cl.getResource("image/inventaire/ruche_inventaire_blanc.jpg")).getImage();
+        Background_hover = new ImageIcon(cl.getResource("image/inventaire/ruche_inventaire_blanc_hover.jpg")).getImage();
     }
 
     public void paintComponent(Graphics g){
