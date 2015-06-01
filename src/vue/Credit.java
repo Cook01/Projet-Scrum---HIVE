@@ -1,8 +1,9 @@
 package vue;
 
-import vue.ImagePanel.EcranAccueil;
+import vue.ImagePanel.EcranCredit;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class Credit extends JFrame{
@@ -28,15 +29,23 @@ public class Credit extends JFrame{
     }
 
     private void affichageCredit() {
-        JPanel jGlobal = new EcranAccueil();
+        JPanel jGlobal = new EcranCredit();
         JPanel conteneurBoutonJouer = new JPanel();
+        JPanel conteneurBoutonCredit = new JPanel();
+        JPanel conteneurEspace = new JPanel();
 
-        jGlobal.setLayout(new BoxLayout(jGlobal, BoxLayout.Y_AXIS));
+        jGlobal.setLayout(new BorderLayout());
+        conteneurBoutonCredit.setLayout(new BoxLayout(conteneurBoutonCredit, BoxLayout.X_AXIS));
+        conteneurBoutonCredit.setOpaque(false);
+        conteneurEspace.setOpaque(false);
         conteneurBoutonJouer.setOpaque(false);
 
-        jGlobal.add(Box.createVerticalStrut((int) (TAILLE_FENETRE_Y * 0.8)));
+        conteneurEspace.add(Box.createVerticalStrut((int) (TAILLE_FENETRE_Y * 0.8)));
+        jGlobal.add(conteneurEspace, BorderLayout.NORTH);
+        conteneurBoutonCredit.add(Box.createHorizontalStrut((int) (TAILLE_FENETRE_X * 0.25)));
         conteneurBoutonJouer.add(boutonCacher);
-        jGlobal.add(conteneurBoutonJouer);
+        conteneurBoutonCredit.add(conteneurBoutonJouer);
+        jGlobal.add(conteneurBoutonCredit, BorderLayout.WEST);
 
         setContentPane(jGlobal);
     }
